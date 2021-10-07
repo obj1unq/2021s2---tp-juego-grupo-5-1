@@ -1,14 +1,15 @@
 import wollok.game.*
 import personaje.*
 import enemigos.*
+import niveles.*
 
 program juego {
 	game.title("Juego Base")
 	game.height(11)
 	game.width(11)
 	game.boardGround("fondo-demo.jpg")
-	game.addVisual(personaje)
-	game.addVisual(escorpion)
+	
+	tutorial.iniciar()
 	
 	game.start()
 }
