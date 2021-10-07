@@ -1,8 +1,14 @@
 import wollok.game.*
-import pepita.*
+import personaje.*
+import enemigos.*
 
 program juego {
 	game.title("Juego Base")
-	game.addVisual(pepita)
+	game.height(11)
+	game.width(11)
+	game.boardGround("fondo-demo.jpg")
+	game.addVisual(personaje)
+	game.addVisual(escorpion)
+	
 	game.start()
 }
