@@ -7,6 +7,9 @@ object arriba {
 	method sufijo(){
 		return "der"
 	}
+	method esVertical(){
+		return true
+	}
 }
 
 object abajo {
@@ -16,6 +19,9 @@ object abajo {
 	
 	method sufijo(){
 		return "der"
+	}
+	method esVertical(){
+		return true
 	}
 }
 
@@ -28,6 +34,9 @@ object izquierda {
 	method sufijo(){
 		return "izq"
 	}
+	method esVertical(){
+		return false
+	}
 }
 
 object derecha {
@@ -37,5 +46,8 @@ object derecha {
 	
 	method sufijo(){
 		return "der"
+	}
+	method esVertical(){
+		return false
 	}
 }

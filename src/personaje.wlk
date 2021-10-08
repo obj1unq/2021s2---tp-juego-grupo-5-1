@@ -12,8 +12,13 @@ object personaje {
 	method image() = "pj-demo-"+ self.sufijo() +".png"
 	
 	method mover(direccion){
+		if(direccion.esVertical()){
+			self.irA(direccion.siguiente(self.position()))
+		}
+		else{
 		dir = direccion
-		self.irA(direccion.siguiente(self.position()))
+		self.irA(direccion.siguiente(self.position()))	
+		}
 	}
 	
 	method irA(nuevaPosicion){
