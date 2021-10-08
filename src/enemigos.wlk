@@ -8,7 +8,7 @@ object escorpion {
 	method image() = "escorpion.png"
 	
 	method pierdeVida(cantidad){
-		hp -=cantidad
+		hp -= cantidad
 	}
 	
 	method muere(){

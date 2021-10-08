@@ -8,6 +8,7 @@ object tutorial {
 		game.addVisual(escorpion)
 		game.addVisual(personaje)
 		config.configurarTeclas()
+		config.configurarStamina()
 	}
 	
 }
@@ -23,7 +24,7 @@ object config{
 	
 	
 	method configurarStamina(){
-	   game.onTick(800, "Stamina", { personaje.recuperarStamina(1)})
+	   game.onTick(800, "STAMINA", { personaje.recuperarStamina(1)})
     }
 	
 }
