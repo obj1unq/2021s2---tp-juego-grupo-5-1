@@ -39,7 +39,7 @@ object personaje {
 		return stamina < 5
 	}
 	
-    method gastaStamina(cantidad){
+ /*    method gastaStamina(cantidad){
     	stamina -=cantidad
     }
 	
@@ -54,6 +54,24 @@ object personaje {
 		else {self.validarStamina()
 			  self.gastaStamina(1)
 		}
+	}
+*/
+    method atacar(enemigo){
+		self.validarStamina()
+        stamina -= 1
+        enemigo.pierdeVida()
+	}
+	
+    method atacaYDesaparece(enemigo){
+		
+		self.atacar(enemigo)
+		game.removeVisual(enemigo)
+    }
+    
+    method atacarEnemigoAdelante(){
+    	const enemigos = game.colliders(self)
+	    	
+		enemigos.forEach({enemigo => self.atacaYDesaparece(enemigo)})
 	}
 	
 	method estaEnMismaPosicionQue(algo){
