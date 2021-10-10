@@ -24,3 +24,29 @@ object escorpion {
 	}
 	
 }
+
+object hiena {
+	var property position = game.at(8,3)
+	var property hp = 4
+	const property expQueOtorga = 5
+	
+	method image() = "hiena.png"
+	
+	method pierdeVida(){
+		hp -= 1
+		self.muere()
+	}
+	
+	method muere(){
+		if(self.noTieneMasVida()){
+			game.removeVisual(self)
+		}
+	}
+	
+	method noTieneMasVida(){
+		return hp == 0
+	}
+	
+}
+
+

@@ -11,8 +11,6 @@ program juego {
 	
 	tutorial.iniciar()
 	
-	game.showAttributes(personaje)
-	game.showAttributes(escorpion)
 	
 	game.start()
 }

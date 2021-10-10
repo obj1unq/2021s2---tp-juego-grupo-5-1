@@ -7,6 +7,12 @@ object tutorial {
 	method iniciar(){
 		game.addVisual(escorpion)
 		game.addVisual(personaje)
+		game.addVisual(hiena)
+		
+		game.showAttributes(personaje)
+		game.showAttributes(escorpion)
+		game.showAttributes(hiena)
+		
 		config.configurarTeclas()
 		config.configurarStamina()
 	}
