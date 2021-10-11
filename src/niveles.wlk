@@ -30,7 +30,7 @@ object config{
 	
 	
 	method configurarStamina(){
-	   game.onTick(800, "STAMINA", { personaje.recuperarStamina(1)})
+	   game.onTick(900, "STAMINA", { personaje.recuperarStamina(1)})
     }
 	
 }
