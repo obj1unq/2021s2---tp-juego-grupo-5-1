@@ -55,7 +55,7 @@ object personaje {
 	
 	method subirDeNivel(_exp){
 		exp += _exp
-		if(exp >= 10){
+		if(exp >= 10 * nivel){
 			nivel += 1
 			exp = 0
 		}
