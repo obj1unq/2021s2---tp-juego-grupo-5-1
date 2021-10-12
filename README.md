@@ -27,16 +27,29 @@
 -------------------------------------------------------------------------------------
 
 IDEAS A FUTURO
+
 recibir daño al colicionar con enemigo.
+
 seguir recibiendo daño a medida que el personaje se mantiene sobre el enemigo. 
+
 modificar stats segun equipamiento del personaje.
+
+
 Puzzles.
+
 Ganar si se mata al final Boss.
+
 Perder si muere.
+
+
 Inventario personaje.
+
+
 Diagrama de Mapa.
 
 ??????
+
+
 como atacar al Aire?
 como equipar equipo y que se vea equipado?
 musicalización se puede agregar?
