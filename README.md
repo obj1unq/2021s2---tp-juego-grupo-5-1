@@ -50,9 +50,11 @@ Diagrama de Mapa.
 ??????
 
 
-como atacar al Aire?
-como equipar equipo y que se vea equipado?
-musicalización se puede agregar?
+-como atacar al Aire?
+
+-como equipar equipo y que se vea equipado?
+
+-musicalización se puede agregar?
 
 
 ------------------------------------------------
