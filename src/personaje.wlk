@@ -45,7 +45,7 @@ object personaje {
 	
 	method estaCansado(){ return stamina == 0 }
 	
-	//ATAQUE--------------------------------------------------------------------------------------------------
+	
 	
     method atacar(enemigo){
 		self.validarStamina()
@@ -53,7 +53,7 @@ object personaje {
         enemigo.pierdeVida()
         self.subirDeNivel(enemigo.expQueOtorga())
 	}
-	//CUANDO SE ATACA AL ENEMIGO ESTE RESPONDE CON UN GOLPE QUE DESCUENTA LA VIDA DEL PERSONAJE PRINCIPAL
+	
 
     method atacarEnemigoAdelante(){
     	const enemigos = game.colliders(self)
@@ -71,7 +71,7 @@ object personaje {
 		espada.usar(self)
 	}
 	
-	//VIDA====================================================
+	
 	method perderVida(x){
 		vida = (vida - x).max(0)
 		self.perder()
@@ -83,7 +83,7 @@ object personaje {
 	
 	method sumarVida(x){vida = (vida + x).min(10)}
 	
-	//INVENTARIO====================================================00
+	
 	method guardar(){
 		const recursos = game.colliders(self)
 		recursos.forEach({
@@ -96,9 +96,7 @@ object personaje {
 		game.removeVisual(recurso)
 	}
 	
-	method remove(recurso){mochila.remove(recurso)}
 	
-	//NIVEL=====================================
 	method subirDeNivel(_exp){
 		exp += _exp
 		if(exp >= 10 * nivel){
@@ -110,7 +108,7 @@ object personaje {
 		self.ganar()
 	}
 	
-	//FIN DEL JUEGO============================================
+	
 	method ganar(){
 		if(!self.faltanEnemigos()){
 			game.say(self,"GANASTE")
