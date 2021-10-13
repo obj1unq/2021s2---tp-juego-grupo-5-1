@@ -4,8 +4,7 @@ import personaje.*
 object espada {
 	var property position = game.at(5,2)
 	const property poder = 5
-	method arma(){return true}
-	method curacion(){return false}
+
 	method image() = "espada.png"
 	
 	method usar(_personaje){
@@ -21,8 +20,7 @@ object espada {
 object curacion {
 	var property position = game.at(7,4)
 	const property poder = 10
-	method arma(){return false}
-	method curacion(){return true}
+
 	method image() = "vida.png"
 	
 	method usar(_personaje){
