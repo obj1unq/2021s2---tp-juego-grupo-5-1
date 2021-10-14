@@ -6,6 +6,8 @@ import recursos.*
 
 object tutorial {
 	method iniciar(){
+		const escorpion = new Enemigo(image="escorpion.png",position=game.at(8,8))
+		const hiena = new Enemigo(image="hiena.png",position=game.at(8,5))
 		game.addVisual(escorpion)
 		game.addVisual(personaje)
 		game.addVisual(hiena)

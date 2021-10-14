@@ -114,12 +114,14 @@ object personaje {
 		if(!self.faltanEnemigos()){
 			game.say(self,"GANASTE")
 			game.schedule(2000,{game.stop()})
-	}}
+		}
+	}
 	
 	method perder(){
 		if(vida == 0){
-		game.say(self,"PERDISTE")
-		game.schedule(2000,{game.stop()})
-	}}
+			game.say(self,"PERDISTE")
+			game.schedule(2000,{game.stop()})
+		}
+	}
 
 }
