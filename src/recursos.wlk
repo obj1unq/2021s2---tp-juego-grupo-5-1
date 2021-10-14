@@ -31,3 +31,11 @@ object texto{
 	method text() = personaje.vida().toString() + " "+ personaje.poder() + " " + personaje.nivel()
 }
 
+object inventario{
+	method position() = game.at(5,4)
+	method image() = "inv-demo.png"
+	method text() = personaje.mochila().toString()
+}
+
+
+

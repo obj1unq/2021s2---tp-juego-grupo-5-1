@@ -15,6 +15,7 @@ object tutorial {
 		game.addVisual(curacion)
 		game.addVisual(brujo)
 		game.addVisual(texto)
+		game.addVisual(inventario)
 		
 		
 		game.showAttributes(escorpion)
@@ -40,6 +41,7 @@ object config{
 		keyboard.s().onPressDo({personaje.guardar()})
 		keyboard.b().onPressDo({personaje.armarse()})
 		keyboard.d().onPressDo({personaje.curarse()})
+		keyboard.i().onPressDo({personaje.abrirInventario()})
 	}
 	
 	

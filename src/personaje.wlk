@@ -117,6 +117,17 @@ object personaje {
 		}
 	}
 	
+	method abrirInventario(){
+		if(not self.elInventarioEstaAbierto()){
+			game.addVisual(inventario)
+		}else{
+			game.removeVisual(inventario)
+		}
+	}
+	
+	method elInventarioEstaAbierto(){
+		return game.hasVisual(inventario)
+	}
 	
 	method ganar(){
 		if(!self.faltanEnemigos()){
@@ -131,5 +142,5 @@ object personaje {
 			game.schedule(2000,{game.stop()})
 		}
 	}
-
+	
 }
