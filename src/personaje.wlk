@@ -40,6 +40,9 @@ object personaje {
 	
 	method estaCansado(){ return stamina == 0 }
 	
+	method contiene(elemento){if (mochila.contains(elemento)) true else self.error("no hay "+ elemento.toString() + " en el inventario")}
+	
+	method remove(elemento){mochila.remove(elemento)}
 	
 	
     method atacar(enemigo){
@@ -63,7 +66,9 @@ object personaje {
 	}
 	
 	method armarse(){
+		self.contiene(espada)
 		espada.usar(self)
+		self.remove(espada)
 	}
 	
 	
@@ -73,7 +78,9 @@ object personaje {
 	}
 	
 	method curarse(){
+		self.contiene(curacion)
 		curacion.usar(self)
+		self.remove(curacion)
 	}
 	
 	method sumarVida(x){vida = (vida + x).min(10)}

@@ -8,14 +8,12 @@ object espada {
 	method image() = "espada.png"
 	
 	method usar(_personaje){
-		if(_personaje.mochila().contains(self)){ // cambiar
 			_personaje.arma(self)
 			_personaje.poder(self.poder())
-			_personaje.mochila().remove(self)  // cambiar
-		}else{
-			self.error("no hay espada en el inventario")
-	}}
-}
+	}
+}	
+	
+
 
 object curacion {
 	var property position = game.at(7,4)
@@ -24,12 +22,7 @@ object curacion {
 	method image() = "vida.png"
 	
 	method usar(_personaje){
-		if(_personaje.mochila().contains(self)){ // cambiar
 			_personaje.sumarVida(poder)
-			_personaje.mochila().remove(self) // cambiar
-		}else{
-			self.error("no hay curas en el inventario")
-		}
 	}
 }
 
