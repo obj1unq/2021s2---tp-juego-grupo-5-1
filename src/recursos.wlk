@@ -13,17 +13,13 @@ object espada {
 	}
 }	
 	
-
-
 object curacion {
 	var property position = game.at(7,4)
 	const property poder = 10
 
 	method image() = "vida.png"
 	
-	method usar(_personaje){
-			_personaje.sumarVida(poder)
-	}
+	method usar(_personaje){_personaje.sumarVida(poder)}
 }
 
 object texto{

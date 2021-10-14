@@ -39,8 +39,6 @@ object personaje {
     method validarStamina(){ if(self.estaCansado()){ self.error("no hay Stamina para poder atacar") } }
 	
 	method estaCansado(){ return stamina == 0 }
-	
-//	method contiene(elemento){if (mochila.contains(elemento)) true else self.error("no hay "+ elemento.toString() + " en el inventario")}
 
 	method contiene(elemento){
 		if(not mochila.contains(elemento)){
@@ -79,7 +77,6 @@ object personaje {
 		self.remove(espada)
 	}
 	
-	
 	method perderVida(x){
 		vida = (vida - x).max(0)
 		self.perder()
@@ -99,7 +96,6 @@ object personaje {
 		recursos.forEach({
 			recurso => self.guardarEnInventario(recurso)})
 	}
-	
 	
 	method guardarEnInventario(recurso){
 		mochila.add(recurso)

@@ -15,7 +15,6 @@ object tutorial {
 		game.addVisual(curacion)
 		game.addVisual(brujo)
 		game.addVisual(texto)
-		game.addVisual(inventario)
 		
 		
 		game.showAttributes(escorpion)
