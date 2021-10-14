@@ -116,8 +116,10 @@ object personaje {
 	method abrirInventario(){
 		if(not self.elInventarioEstaAbierto()){
 			game.addVisual(inventario)
+			game.addVisual(items) // esto se puede sacar
 		}else{
 			game.removeVisual(inventario)
+			game.removeVisual(items) // esto se puede sacar
 		}
 	}
 	
