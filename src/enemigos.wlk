@@ -68,6 +68,7 @@ object brujo{
 	method muere(){
 		if(self.noTieneMasVida()){
 			game.removeVisual(self)
+			personaje.ganar()
 		}
 	}
 	

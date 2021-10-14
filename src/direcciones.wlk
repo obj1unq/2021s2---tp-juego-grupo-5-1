@@ -7,8 +7,8 @@ object arriba {
 	method sufijo(){
 		return "der"
 	}
-	method esVertical(){
-		return true
+	method cambiar(dirOriginal){
+		return dirOriginal
 	}
 }
 
@@ -20,8 +20,8 @@ object abajo {
 	method sufijo(){
 		return "der"
 	}
-	method esVertical(){
-		return true
+	method cambiar(dirOriginal){
+		return dirOriginal
 	}
 }
 
@@ -34,8 +34,8 @@ object izquierda {
 	method sufijo(){
 		return "izq"
 	}
-	method esVertical(){
-		return false
+	method cambiar(dirOriginal){
+		return self
 	}
 }
 
@@ -47,7 +47,7 @@ object derecha {
 	method sufijo(){
 		return "der"
 	}
-	method esVertical(){
-		return false
+	method cambiar(dirOriginal){
+		return self
 	}
 }
