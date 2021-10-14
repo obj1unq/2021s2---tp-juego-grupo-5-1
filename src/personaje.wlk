@@ -40,7 +40,15 @@ object personaje {
 	
 	method estaCansado(){ return stamina == 0 }
 	
-	method contiene(elemento){if (mochila.contains(elemento)) true else self.error("no hay "+ elemento.toString() + " en el inventario")}
+//	method contiene(elemento){if (mochila.contains(elemento)) true else self.error("no hay "+ elemento.toString() + " en el inventario")}
+
+	method contiene(elemento){
+		if(not mochila.contains(elemento)){
+			self.error("no hay "+ elemento.toString() + " en el inventario")
+		}else{
+			mochila.contains(elemento)	
+		}
+	}
 	
 	method remove(elemento){mochila.remove(elemento)}
 	
