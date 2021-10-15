@@ -16,6 +16,7 @@ class Enemigo {
 	method muere(){
 		if(self.noTieneMasVida()){
 			game.removeVisual(self)
+			//game.addVisual(new Drop(oro = 500))
 		}
 	}
 	
@@ -24,6 +25,8 @@ class Enemigo {
 	}
 	
 	method visualizar(){}
+	
+	
 	
 }
 
@@ -53,5 +56,12 @@ object brujo{
 	}
 	
 }
-
-
+//   SE INTENTO HACER UN DROP EN LA POSICIÓN DEL ENEMIGO A ELIMINAR.
+//class Drop{
+//	const property enemigo = new Enemigo()
+//	var oro = 100
+//	var property item
+//	var property position = 
+//	
+//	method x(){return new Enemig }
+//}
