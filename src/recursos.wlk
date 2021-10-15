@@ -8,30 +8,55 @@ object espada {
 	method image() = "espada.png"
 	
 	method usar(_personaje){
-			_personaje.arma(self)
-			_personaje.poder(self.poder())
+			if(not game.hasVisual(self)){
+				_personaje.arma(self)
+			    _personaje.poder(self.poder())
+			}
+			else{_personaje.arma(self)
+			    _personaje.poder(self.poder())
+			    game.removeVisual(self)
+			    }
+				
 	}
 	
 	
-	// este metodo se puede sacar
-	method mostrar(){
-		game.addVisual(self) 
+
+	method visualizar(){
+		   game.addVisual(self)	
 	}
+	
+	method reubicar(){position = game.at(6,5)}
+	method dejarDeVisualizar(){game.removeVisual(self)}
 }	
 	
 object curacion {
-	var property position = game.at(7,4)
+	var property position = game.at(7,5)
 	const property poder = 10
 
 	method image() = "vida.png"
 	
-	method usar(_personaje){_personaje.sumarVida(poder)}
-	
-	
-	// este metodo se puede sacar
-	method mostrar(){
-		game.addVisual(self) 
+	method usar(_personaje){
+		if(not game.hasVisual(self)){
+			_personaje.sumarVida(poder) 
+		}
+		else{
+			_personaje.sumarVida(poder)
+			game.removeVisual(self)
+		}
+		      
+		
 	}
+	
+	
+	
+	
+	method reubicar(){position = game.at(8,5)}
+	
+	method visualizar(){
+		   game.addVisual(self)	
+	}
+	
+	method dejarDeVisualizar(){game.removeVisual(self)}
 }
 
 object texto{
@@ -45,18 +70,10 @@ object texto{
 object inventario{
 	method position() = game.at(5,4)
 	method image() = "inv-demo.png"
-	method text() = personaje.mochila().toString()
+	
 }
 
-object items{
-	const property objetos = personaje.mochila()
-	
-	method image() = self.mostrarItems()
-	
-	method mostrarItems(){
-		return objetos.map({item => item.mostrar()})
-	}
-}
+
 
 
 

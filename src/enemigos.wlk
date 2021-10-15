@@ -23,6 +23,8 @@ class Enemigo {
 		return hp == 0
 	}
 	
+	method visualizar(){}
+	
 }
 
 object brujo{

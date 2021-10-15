@@ -17,6 +17,7 @@ object tutorial {
 		game.addVisual(texto)
 		
 		
+		
 		game.showAttributes(escorpion)
 		game.showAttributes(hiena)
 		game.showAttributes(espada)

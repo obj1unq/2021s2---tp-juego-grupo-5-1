@@ -116,10 +116,13 @@ object personaje {
 	method abrirInventario(){
 		if(not self.elInventarioEstaAbierto()){
 			game.addVisual(inventario)
-			game.addVisual(items) // esto se puede sacar
+			//game.addVisual(items)
+			mochila.forEach({item => item.visualizar() item.reubicar()})
+			
 		}else{
 			game.removeVisual(inventario)
-			game.removeVisual(items) // esto se puede sacar
+			//game.removeVisual(items)
+			mochila.forEach({item => item.dejarDeVisualizar()})
 		}
 	}
 	
