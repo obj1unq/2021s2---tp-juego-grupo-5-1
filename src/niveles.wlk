@@ -11,17 +11,13 @@ object tutorial {
 		game.addVisual(escorpion)
 		game.addVisual(personaje)
 		game.addVisual(hiena)
-		game.addVisual(espada)
-		game.addVisual(curacion)
 		game.addVisual(brujo)
-		game.addVisual(texto)
+//		game.addVisual(texto)
 		
 		
 		
 		game.showAttributes(escorpion)
 		game.showAttributes(hiena)
-		game.showAttributes(espada)
-		game.showAttributes(curacion)
 		game.showAttributes(brujo)
 		game.showAttributes(personaje)
 		config.configurarTeclas()
@@ -41,7 +37,7 @@ object config{
 		keyboard.s().onPressDo({personaje.guardar()})
 		keyboard.b().onPressDo({personaje.armarse()})
 		keyboard.d().onPressDo({personaje.curarse()})
-		keyboard.i().onPressDo({personaje.abrirInventario()})
+//		keyboard.i().onPressDo({personaje.abrirInventario()})
 	}
 	
 	

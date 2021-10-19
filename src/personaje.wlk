@@ -112,24 +112,7 @@ object personaje {
 			poder += 1
 		}
 	}
-	
-	method abrirInventario(){
-		if(not self.elInventarioEstaAbierto()){
-			game.addVisual(inventario)
-			//game.addVisual(items)
-			mochila.forEach({item => item.visualizar() item.reubicar()})
-			
-		}else{
-			game.removeVisual(inventario)
-			//game.removeVisual(items)
-			mochila.forEach({item => item.dejarDeVisualizar()})
-		}
-	}
-	
-	method elInventarioEstaAbierto(){
-		return game.hasVisual(inventario)
-	}
-	
+
 	method ganar(){
 		if(!self.faltanEnemigos()){
 			game.say(self,"GANASTE")

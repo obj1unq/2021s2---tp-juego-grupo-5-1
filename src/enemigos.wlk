@@ -1,5 +1,6 @@
 import wollok.game.*
 import personaje.*
+import recursos.*
 
 class Enemigo {
 	var property position
@@ -7,7 +8,7 @@ class Enemigo {
 	const property expQueOtorga = 2
 	var property golpe = 1
 	var property image
-	
+		
 	method pierdeVida(){
 		hp = (hp - personaje.poder()).max(0)
 		self.muere()
@@ -16,17 +17,13 @@ class Enemigo {
 	method muere(){
 		if(self.noTieneMasVida()){
 			game.removeVisual(self)
-			//game.addVisual(new Drop(oro = 500))
+			game.addVisual(curaciona)
 		}
 	}
 	
 	method noTieneMasVida(){
 		return hp == 0
 	}
-	
-	method visualizar(){}
-	
-	
 	
 }
 
