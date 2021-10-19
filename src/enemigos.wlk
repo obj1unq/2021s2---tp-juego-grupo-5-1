@@ -17,7 +17,7 @@ class Enemigo {
 	method muere(){
 		if(self.noTieneMasVida()){
 			game.removeVisual(self)
-			game.addVisual(curaciona)
+			game.addVisual(curacion)
 		}
 	}
 	
