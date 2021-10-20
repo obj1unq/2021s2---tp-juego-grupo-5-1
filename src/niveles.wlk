@@ -6,14 +6,19 @@ import recursos.*
 
 object tutorial {
 	method iniciar(){
-		game.addVisual(personaje)
-		game.showAttributes(personaje)
-		
-		self.armas()
-		self.enemigos()
-		
+		visual.personaje()
+		visual.armas()
+		visual.enemigos()
+		config.sonido()
 		config.configurarTeclas()
 		config.configurarStamina()
+	}
+	
+}
+
+object visual{
+	method personaje(){
+		game.addVisual(player)
 	}
 	
 	method armas(){
@@ -22,17 +27,11 @@ object tutorial {
 		game.addVisual(lanza)
 		game.addVisual(daga)
 	}
-	
 	method enemigos(){
-		const escorpion = new Enemigo(image="escorpion.png",position=game.at(8,8))
-		const hiena = new Enemigo(image="hiena.png",position=game.at(8,5))
-		const goblin = new Enemigo(image="enemigos/Goblin/Idle/1.png",position=game.at(3,5))
-		
 		game.addVisual(escorpion)
 		game.addVisual(hiena)
 		game.addVisual(goblin)
 		game.addVisual(brujo)
-		
 		game.showAttributes(escorpion)
 		game.showAttributes(hiena)
 		game.showAttributes(brujo)
@@ -45,29 +44,35 @@ object config{
 		self.equiparse()
 		self.movimientos()
 		
-		keyboard.s().onPressDo({personaje.guardar()})
+		keyboard.s().onPressDo({player.guardar()})
 		
-		keyboard.q().onPressDo({personaje.curarse()})
+		keyboard.q().onPressDo({player.curarse()})
 //		keyboard.i().onPressDo({personaje.abrirInventario()})
 	}
 	
+	method sonido(){
+		const sonido = game.sound("donkey-kong-country.mp3")
+		sonido.shouldLoop(true)
+		game.schedule(500, { sonido.play()} )
+	}
+	
 	method equiparse(){
-		keyboard.num1().onPressDo({personaje.armarse(espada)})
-		keyboard.num2().onPressDo({personaje.armarse(hacha)})
-		keyboard.num3().onPressDo({personaje.armarse(daga)})
-		keyboard.num4().onPressDo({personaje.armarse(lanza)})
+		keyboard.num1().onPressDo({player.armarse(espada)})
+		keyboard.num2().onPressDo({player.armarse(hacha)})
+		keyboard.num3().onPressDo({player.armarse(daga)})
+		keyboard.num4().onPressDo({player.armarse(lanza)})
 	}
 	
 	method movimientos(){
-		keyboard.left().onPressDo( { personaje.mover(izquierda)})
-		keyboard.right().onPressDo({ personaje.mover(derecha)})
-		keyboard.up().onPressDo(   { personaje.mover(arriba)})
-		keyboard.down().onPressDo( { personaje.mover(abajo)})
-		keyboard.a().onPressDo({personaje.atacarEnemigoAdelante()})
+		keyboard.left().onPressDo( { player.mover(izquierda)})
+		keyboard.right().onPressDo({ player.mover(derecha)})
+		keyboard.up().onPressDo(   { player.mover(arriba)})
+		keyboard.down().onPressDo( { player.mover(abajo)})
+		keyboard.a().onPressDo({player.atacarEnemigoAdelante()})
 	}
 	
 	method potas(){
-		keyboard.q().onPressDo({personaje.curarse()})
+		keyboard.q().onPressDo({player.curarse()})
 		//keyboard.w().onPressDo({personaje.curarse(larga)})
 		//keyboard.e().onPressDo({personaje.curarse(stamina)})
 		//keyboard.r().onPressDo({personaje.curarse(veneno)})
@@ -75,7 +80,7 @@ object config{
 	
 	
 	method configurarStamina(){
-	   game.onTick(900, "STAMINA", { personaje.recuperarStamina(1)})
+	   game.onTick(900, "STAMINA", { player.recuperarStamina(1)})
     }
 	
 }

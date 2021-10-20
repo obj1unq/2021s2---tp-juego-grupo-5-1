@@ -14,6 +14,7 @@ class Arma {
 	method neutral(){
 		return true
 	}
+	method validarGuardado(){}
 }
 
 object espada inherits Arma(position=game.at(2,2),image="items/espada.png",poder=4){}
@@ -35,7 +36,7 @@ object curacion {
 	method neutral(){
 		return true	
 	}
-	
+	method validarGuardado(){}
 }
 
 

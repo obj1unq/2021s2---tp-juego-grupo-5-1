@@ -3,15 +3,15 @@ import direcciones.*
 import enemigos.*
 import recursos.*
 
-object personaje {
-    var property stamina = 5
+class Personaje {
+    var property stamina
 	var property position = game.origin()
 	var dir = derecha
 	var  property nivel = 1
 	var exp = 0
-	var property vida = 10
-	var property poder = 5
-	var property arma
+	var property vida
+	var property poder
+	var property arma = null
 	const property mochila = []
 	
 	method image() = "pj-demo-"+ self.sufijo() +".png"
@@ -28,7 +28,6 @@ object personaje {
 	method sufijo(){
 		return dir.sufijo()
 	}
-	
 	
 	method recuperarStamina(cantidad){ if (self.noTieneFullStamina()){ stamina += cantidad } }
 	
@@ -54,7 +53,7 @@ object personaje {
     method atacar(enemigo){
 		self.validarStamina()
         self.gastaStamina(1)
-        enemigo.pierdeVida()
+        enemigo.pierdeVida(poder)
         self.subirDeNivel(enemigo.expQueOtorga())
 	}
 	
@@ -92,9 +91,9 @@ object personaje {
 	
 	method guardar(){
 		const recursos = game.colliders(self)
-		self.validarSiSePuedeGuardar()
-		recursos.forEach({
-			recurso => self.guardarEnInventario(recurso)
+		recursos.forEach({recurso => 
+			recurso.validarGuardado()
+			self.guardarEnInventario(recurso)
 		})
 	}
 	
@@ -103,12 +102,12 @@ object personaje {
 		game.removeVisual(recurso)
 	}
 
-	method validarSiSePuedeGuardar(){
-		const recursos = game.colliders(self)
-		if(! recursos.any({obj => obj.neutral()})){
-			self.error("No se puede guardar a un enemigo")
-		}
-	}
+//	method validarSiSePuedeGuardar(recursos){
+//		
+//		if(! recursos.any({obj => obj.neutral()})){
+//			self.error("No se puede guardar a un enemigo")
+//		}
+//	}
 	
 	method subirDeNivel(_exp){
 		exp += _exp
@@ -135,3 +134,5 @@ object personaje {
 	}
 	
 }
+//DEFINICION DE PLAYER 1 
+const player = new Personaje(stamina = 5,poder = 5,vida = 10)

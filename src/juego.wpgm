@@ -8,9 +8,6 @@ program juego {
 	game.height(13)
 	game.width(21)
 	game.boardGround("fondo-demo.jpg")
-	const sonido = game.sound("donkey-kong-country.mp3")
-	sonido.shouldLoop(true)
-	game.schedule(500, { sonido.play()} )
 	tutorial.iniciar()
 	game.start()
 }

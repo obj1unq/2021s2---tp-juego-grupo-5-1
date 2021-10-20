@@ -9,8 +9,8 @@ class Enemigo {
 	var property golpe = 1
 	var property image
 		
-	method pierdeVida(){
-		hp = (hp - personaje.poder()).max(0)
+	method pierdeVida(poder){
+		hp = (hp - poder).max(0)
 		self.muere()
 	}
 	
@@ -24,44 +24,25 @@ class Enemigo {
 		return hp == 0
 	}
 	
-	method neutral(){
-		return false	
-	}
-	
+//	method neutral(){
+//		return false	
+//	}
+	method validarGuardado(){self.error("No se puede guardar a un enemigo")}
 	
 }
 
-object brujo{
-	var property position = game.at(15,5)
-	var property hp = 20
-	const property expQueOtorga = 5
+class EnemigoFinal inherits Enemigo{
 	
-	method golpe() = 2
-	
-	method image() = "enemigo.png"
-	 
-	method pierdeVida(){
-		hp = (hp - personaje.poder()).max(0)
-		self.muere()
+	override method muere(){
+		super()
+		player.ganar()
 	}
-	
-	method muere(){
-		if(self.noTieneMasVida()){
-			game.removeVisual(self)
-			personaje.ganar()
-		}
-	}
-	
-	method noTieneMasVida(){
-		return hp == 0
-	}
-	
-	method neutral(){
-		return false	
-	}
-	
-	
 }
+//DEFINICION DE ENEMIGOS
+const escorpion = new Enemigo(image="escorpion.png",position=game.at(8,8))
+const hiena = new Enemigo(image="hiena.png",position=game.at(8,5))
+const goblin = new Enemigo(image="enemigos/Goblin/Idle/1.png",position=game.at(3,5))
+const brujo = new EnemigoFinal(position=game.at(15,5),hp = 20,expQueOtorga=5,golpe=2,image="enemigo.png")
 
 //   SE INTENTO HACER UN DROP EN LA POSICIÓN DEL ENEMIGO A ELIMINAR.
 //class Drop{
