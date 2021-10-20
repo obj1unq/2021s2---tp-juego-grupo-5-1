@@ -23,21 +23,21 @@ object lanza  inherits Arma(position=game.at(6,2),image="items/lanza.png",poder=
 object daga   inherits Arma(position=game.at(8,2),image="items/daga.png",poder=3){}
 
 	
-object curacion {
-	var property position = game.at(7,5)
-	const property poder = 10
-
-	method image() = "vida.png"
+class Cura{
+	var property position
+	const property poder
+	var property image
 	
 	method usar(_personaje){
 		_personaje.sumarVida(poder) 
 	}
 	
-	method neutral(){
-		return true	
-	}
+//	method neutral(){
+//		return true	
+//	}
 	method validarGuardado(){}
 }
+object curacion inherits Cura(position = game.at(7,5),poder = 10,image = "vida.png"){}
 
 
 	
