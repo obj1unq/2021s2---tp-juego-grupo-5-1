@@ -1,18 +1,26 @@
 import wollok.game.*
 import personaje.*
 
-object espada {
-	var property position = game.at(5,2)
-	const property poder = 5
-
-	method image() = "espada.png"
+class Arma {
+	var property position
+	var property poder
+	var property image
 	
 	method usar(_personaje){
 		_personaje.arma(self)
 		_personaje.poder(self.poder())
 	}
 	
-}	
+	method neutral(){
+		return true
+	}
+}
+
+object espada inherits Arma(position=game.at(2,2),image="items/espada.png",poder=4){}
+object hacha  inherits Arma(position=game.at(4,2),image="items/hacha.png",poder=7){}
+object lanza  inherits Arma(position=game.at(6,2),image="items/lanza.png",poder=5){}
+object daga   inherits Arma(position=game.at(8,2),image="items/daga.png",poder=3){}
+
 	
 object curacion {
 	var property position = game.at(7,5)
@@ -23,6 +31,11 @@ object curacion {
 	method usar(_personaje){
 		_personaje.sumarVida(poder) 
 	}
+	
+	method neutral(){
+		return true	
+	}
+	
 }
 
 

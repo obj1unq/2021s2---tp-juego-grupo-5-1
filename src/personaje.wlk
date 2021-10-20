@@ -10,7 +10,7 @@ object personaje {
 	var  property nivel = 1
 	var exp = 0
 	var property vida = 10
-	var property poder = 1
+	var property poder = 5
 	var property arma
 	const property mochila = []
 	
@@ -58,7 +58,6 @@ object personaje {
         self.subirDeNivel(enemigo.expQueOtorga())
 	}
 	
-
     method atacarEnemigoAdelante(){
     	const enemigos = game.colliders(self)
 		enemigos.forEach({
@@ -71,10 +70,10 @@ object personaje {
 		return game.hasVisual(brujo)
 	}
 	
-	method armarse(){
-		self.contiene(espada)
-		espada.usar(self)
-		self.remove(espada)
+	method armarse(_arma){
+		self.contiene(_arma)
+		_arma.usar(self)
+		self.remove(_arma)
 	}
 	
 	method perderVida(x){
@@ -93,15 +92,23 @@ object personaje {
 	
 	method guardar(){
 		const recursos = game.colliders(self)
+		self.validarSiSePuedeGuardar()
 		recursos.forEach({
-			recurso => self.guardarEnInventario(recurso)})
+			recurso => self.guardarEnInventario(recurso)
+		})
 	}
 	
 	method guardarEnInventario(recurso){
 		mochila.add(recurso)
 		game.removeVisual(recurso)
 	}
-	
+
+	method validarSiSePuedeGuardar(){
+		const recursos = game.colliders(self)
+		if(! recursos.any({obj => obj.neutral()})){
+			self.error("No se puede guardar a un enemigo")
+		}
+	}
 	
 	method subirDeNivel(_exp){
 		exp += _exp

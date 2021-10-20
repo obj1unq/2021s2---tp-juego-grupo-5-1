@@ -17,13 +17,17 @@ class Enemigo {
 	method muere(){
 		if(self.noTieneMasVida()){
 			game.removeVisual(self)
-			game.addVisual(curacion)
 		}
 	}
 	
 	method noTieneMasVida(){
 		return hp == 0
 	}
+	
+	method neutral(){
+		return false	
+	}
+	
 	
 }
 
@@ -52,7 +56,13 @@ object brujo{
 		return hp == 0
 	}
 	
+	method neutral(){
+		return false	
+	}
+	
+	
 }
+
 //   SE INTENTO HACER UN DROP EN LA POSICIÓN DEL ENEMIGO A ELIMINAR.
 //class Drop{
 //	const property enemigo = new Enemigo()
