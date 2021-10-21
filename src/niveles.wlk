@@ -19,6 +19,7 @@ object tutorial {
 object visual{
 	method personaje(){
 		game.addVisual(player)
+		game.showAttributes(player)
 	}
 	
 	method armas(){

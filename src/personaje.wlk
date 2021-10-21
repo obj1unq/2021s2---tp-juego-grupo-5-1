@@ -12,7 +12,7 @@ class Personaje {
 	var property vida
 	var property poder
 	var property arma = null
-	const property mochila = []
+	const property mochila = inventario
 	
 	method image() = "pj-demo-"+ self.sufijo() +".png"
 	
@@ -40,10 +40,8 @@ class Personaje {
 	method estaCansado(){ return stamina == 0 }
 
 	method contiene(elemento){
-		if(not mochila.contains(elemento)){
+		if(not mochila.tiene(elemento)){
 			self.error("no hay "+ elemento.toString() + " en el inventario")
-		}else{
-			mochila.contains(elemento)	
 		}
 	}
 	
@@ -98,17 +96,9 @@ class Personaje {
 	}
 	
 	method guardarEnInventario(recurso){
-		mochila.add(recurso)
-		game.removeVisual(recurso)
+		mochila.agregar(recurso)
 	}
 
-//	method validarSiSePuedeGuardar(recursos){
-//		
-//		if(! recursos.any({obj => obj.neutral()})){
-//			self.error("No se puede guardar a un enemigo")
-//		}
-//	}
-	
 	method subirDeNivel(_exp){
 		exp += _exp
 		if(exp >= 10 * nivel){
@@ -134,5 +124,40 @@ class Personaje {
 	}
 	
 }
+
+object inventario{
+	const property mochilaPersonaje = []
+	
+	method agregar(elemento){
+		mochilaPersonaje.add(elemento)
+		elemento.agregadoEn(self)
+	}
+	method eliminar(elemento){
+		mochilaPersonaje.remove(elemento)
+		elemento.agregadoEn(null)
+		//elemento.position()
+	}
+	method tiene(elemento){
+		return mochilaPersonaje.contains(elemento)
+	}
+	method dondeEstoy(elemento){
+		return game.at(self.calcularX(elemento), 10)
+	}
+	method calcularX(elemento){
+		var x = 0
+		var encontrado = false
+		mochilaPersonaje.forEach({_elemento =>
+			if(elemento != _elemento && ! encontrado){
+				x = x + 1
+			}else{
+				encontrado = true
+			}
+		})
+		return x
+	}
+}
+
+
+
 //DEFINICION DE PLAYER 1 
 const player = new Personaje(stamina = 5,poder = 5,vida = 10)

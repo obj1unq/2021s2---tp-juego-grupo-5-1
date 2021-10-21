@@ -5,6 +5,7 @@ class Arma {
 	var property position
 	var property poder
 	var property image
+	var contenedor = null
 	
 	method usar(_personaje){
 		_personaje.arma(self)
@@ -15,6 +16,18 @@ class Arma {
 		return true
 	}
 	method validarGuardado(){}
+	
+	method agregadoEn(_contenedor){
+		contenedor = _contenedor
+	}
+	
+	method position(){
+		return if(contenedor != null){
+			contenedor.dondeEstoy(self)
+		}else{
+			position
+		}
+	}
 }
 
 object espada inherits Arma(position=game.at(2,2),image="items/espada.png",poder=4){}
@@ -36,6 +49,10 @@ class Cura{
 //		return true	
 //	}
 	method validarGuardado(){}
+	
+	method agregadoEn(){
+		
+	}
 }
 object curacion inherits Cura(position = game.at(7,5),poder = 10,image = "vida.png"){}
 
