@@ -30,31 +30,41 @@ class Arma {
 	}
 }
 
-object espada inherits Arma(position=game.at(2,2),image="items/espada.png",poder=4){}
-object hacha  inherits Arma(position=game.at(4,2),image="items/hacha.png",poder=7){}
-object lanza  inherits Arma(position=game.at(6,2),image="items/lanza.png",poder=5){}
-object daga   inherits Arma(position=game.at(8,2),image="items/daga.png",poder=3){}
+object espada inherits Arma(position=player.position(),image="items/espada.png",poder=4){}
+object hacha  inherits Arma(position=player.position(),image="items/hacha.png",poder=7){}
+object lanza  inherits Arma(position=player.position(),image="items/lanza.png",poder=5){}
+object daga   inherits Arma(position=player.position(),image="items/daga.png",poder=3){}
 
 	
 class Cura{
 	var property position
 	const property poder
 	var property image
+	var contenedor = null
 	
 	method usar(_personaje){
-		_personaje.sumarVida(poder) 
+		_personaje.sumarVida(poder)
+		game.removeVisual(self)
 	}
 	
-//	method neutral(){
-//		return true	
-//	}
+	method neutral(){
+		return true	
+	}
 	method validarGuardado(){}
 	
-	method agregadoEn(){
-		
+	method agregadoEn(_contenedor){
+		contenedor = _contenedor
+	}
+	
+	method position(){
+		return if(contenedor != null){
+			contenedor.dondeEstoy(self)
+		}else{
+			position
+		}
 	}
 }
-object curacion inherits Cura(position = game.at(7,5),poder = 10,image = "vida.png"){}
+object curacion inherits Cura(position=player.position(),poder = 10,image = "vida.png"){}
 
 
 	

@@ -45,7 +45,7 @@ class Personaje {
 		}
 	}
 	
-	method remove(elemento){mochila.remove(elemento)}
+	method remove(elemento){mochila.eliminar(elemento)}
 	
 	
     method atacar(enemigo){
@@ -70,7 +70,7 @@ class Personaje {
 	method armarse(_arma){
 		self.contiene(_arma)
 		_arma.usar(self)
-		self.remove(_arma)
+		//self.remove(_arma)
 	}
 	
 	method perderVida(x){
@@ -135,7 +135,7 @@ object inventario{
 	method eliminar(elemento){
 		mochilaPersonaje.remove(elemento)
 		elemento.agregadoEn(null)
-		//elemento.position()
+		elemento.position()
 	}
 	method tiene(elemento){
 		return mochilaPersonaje.contains(elemento)

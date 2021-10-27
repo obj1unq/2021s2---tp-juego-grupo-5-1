@@ -23,10 +23,10 @@ object visual{
 	}
 	
 	method armas(){
-		game.addVisual(hacha)
-		game.addVisual(espada)
-		game.addVisual(lanza)
-		game.addVisual(daga)
+		//game.addVisual(hacha)
+		//game.addVisual(espada)
+		//game.addVisual(lanza)
+		//game.addVisual(daga)
 	}
 	method enemigos(){
 		game.addVisual(escorpion)

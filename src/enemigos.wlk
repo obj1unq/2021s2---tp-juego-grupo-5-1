@@ -17,7 +17,22 @@ class Enemigo {
 	method muere(){
 		if(self.noTieneMasVida()){
 			game.removeVisual(self)
+			self.soltarDrop()
 		}
+	}
+	
+	method soltarDrop(){ 
+	    // se arma un drop en base a una lista de objetos, de momento se me ocurre armar una lista segun la clase de enemigo
+	    // diferenciandolos por enemigos base, bosses, etc..
+		const item = self.posiblesDrops().anyOne()
+		
+		if(not game.hasVisual(item))
+		game.addVisual(item)
+		else{}
+	}
+	
+	method posiblesDrops(){
+		return [curacion,hacha, espada]
 	}
 	
 	method noTieneMasVida(){
