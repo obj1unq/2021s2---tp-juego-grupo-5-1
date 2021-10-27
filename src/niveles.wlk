@@ -7,8 +7,8 @@ import recursos.*
 object tutorial {
 	method iniciar(){
 		visual.personaje()
-		visual.enemigos()
-		config.sonido()
+		visual.enemigo()
+		//config.sonido()
 		config.configurarTeclas()
 		config.configurarStamina()
 	}
@@ -21,16 +21,15 @@ object visual{
 		game.showAttributes(player)
 	}
 	
-	method enemigos(){
+	method enemigo(){
 		game.addVisual(escorpion)
 		game.showAttributes(escorpion)
 //		game.addVisual(hiena)
 //		game.addVisual(goblin)
 //		game.addVisual(brujo)
 		
-//		game.showAttributes(hiena)
-//		game.showAttributes(brujo)
-//		game.showAttributes(goblin)
+		
+	
 	}
 }
 

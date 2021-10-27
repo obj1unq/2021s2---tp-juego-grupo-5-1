@@ -26,7 +26,7 @@ class Arma {
 //	method neutral(){
 //		return true
 //	}
-//	method validarGuardado(){}
+	method validarGuardado(){}
 //	
 //	method agregadoEn(_contenedor){
 //		contenedor = _contenedor
@@ -46,7 +46,7 @@ object hacha  inherits Arma(image="items/hacha.png",poder=7){}
 object lanza  inherits Arma(image="items/lanza.png",poder=5){}
 object daga   inherits Arma(image="items/daga.png",poder=3){}
 
-	
+
 class Cura{
 //	var property position
 	const property poder
@@ -62,7 +62,7 @@ class Cura{
 //	method neutral(){
 //		return true	
 //	}
-//	method validarGuardado(){}
+	method validarGuardado(){}
 //	
 //	method agregadoEn(_contenedor){
 //		contenedor = _contenedor
@@ -77,8 +77,8 @@ class Cura{
 //	}
 }
 object curacion inherits Cura(poder = 10,image = "vida.png"){}
-
-
+//DEFINICION DE RECURSOS
+const recursos = [espada,curacion]	
 	
 
 

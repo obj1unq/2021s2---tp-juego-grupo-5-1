@@ -20,6 +20,13 @@ class Personaje {
 	method mover(direccion){
 		self.irA(direccion.siguiente(self.position()))
 		dir = direccion.cambiar(dir)
+		game.onCollideDo(self,{elemento => 
+			if(elemento.tipo() == "Coin"){
+				coins += elemento.cantidad()
+				game.say(self,"Vamos!")
+				game.removeVisual(elemento)
+			}
+		})
 	}
 	
 	method irA(nuevaPosicion){position = nuevaPosicion}
@@ -53,8 +60,8 @@ class Personaje {
 	}
 	
     method atacarEnemigoAdelante(){
-    	const enemigos = game.colliders(self)
-		enemigos.forEach({
+    	const elementos = game.colliders(self)
+		elementos.forEach({
 			enemigo => self.atacar(enemigo)
 			self.perderVida(enemigo.golpe())
 		})
@@ -66,7 +73,7 @@ class Personaje {
 	
 	method armarse(_arma){
 		self.contiene(_arma)
-		_arma.usar(self)
+		arma = _arma
 		//self.remove(_arma)
 	}
 	
@@ -85,8 +92,8 @@ class Personaje {
 	
 	
 	method guardar(){
-		const recursos = game.colliders(self)
-		recursos.forEach({recurso => 
+		const elementos = game.colliders(self)
+		elementos.forEach({recurso => 
 			recurso.validarGuardado()
 			self.guardarEnInventario(recurso)
 		})
@@ -94,6 +101,7 @@ class Personaje {
 	
 	method guardarEnInventario(recurso){
 		mochila.agregar(recurso)
+		game.removeVisual(recurso)
 	}
 
 	method subirDeNivel(_exp){

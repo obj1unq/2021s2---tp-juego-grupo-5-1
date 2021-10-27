@@ -5,8 +5,6 @@ import recursos.*
 class Enemigo {
 	var property position
 	const property image
-	var property objetoBonus = null
-	var property enemigoSiguiente = null
 	var property hp = 10
 	var property expQueOtorga = 2
 	var property golpe = 1
@@ -26,9 +24,24 @@ class Enemigo {
 	
 	method addLiberarCoin(){coins.agregar(position)}
 	
-	method addObjetoEspecial(){game.addVisualIn(objetoBonus,position)}
+	method addObjetoEspecial(){
+		if(recursos.size() >= 1){
+			const objetoBonus = recursos.first()
+			game.addVisualIn(objetoBonus,position)
+			game.showAttributes(objetoBonus)
+			recursos.remove(objetoBonus)
+		}
+		
+	}
 	
-	method addEnemigoSiguiente(){game.addVisual(enemigoSiguiente)}
+	method addEnemigoSiguiente(){
+		if(enemigos.size() >= 1){
+			const enemigoSiguiente = enemigos.first()
+			game.addVisual(enemigoSiguiente)
+			game.showAttributes(enemigoSiguiente)
+			enemigos.remove(enemigoSiguiente)
+		}
+	}
 	
 	method muere(){
 		if(self.noTieneMasVida()){
@@ -36,7 +49,7 @@ class Enemigo {
 			self.addLiberarCoin()
 			self.addObjetoEspecial()
 			self.addEnemigoSiguiente()
-			game.schedule(1000,{game.removeVisual(self)})
+			game.schedule(800,{game.removeVisual(self)})
 			//self.soltarDrop()
 		}
 	}
@@ -79,10 +92,10 @@ class EnemigoFinal inherits Enemigo{
 //DEFINICION DE ENEMIGOS
 //
 const brujo = new EnemigoFinal(hp = 20,expQueOtorga=5,golpe=2,image="enemigo.png",position=game.at(15,5))
-const hiena = new Enemigo(image="hiena.png",objetoBonus = new Cura(poder = 10,image = "vida.png"),enemigoSiguiente = brujo,position=game.at(10,5))
-const escorpion = new Enemigo(position = game.at(8,8),image="escorpion.png",objetoBonus = new Arma(image="items/espada.png",poder=4),enemigoSiguiente = hiena)
+const hiena = new Enemigo(image="hiena.png",position=game.at(10,5))
+const escorpion = new Enemigo(position = game.at(8,2),image="escorpion.png")
 const goblin = new Enemigo(image="enemigos/Goblin/Idle/1.png",position=game.at(3,5))
-
+const enemigos = [hiena,goblin,brujo]
 
 //   SE INTENTO HACER UN DROP EN LA POSICIÓN DEL ENEMIGO A ELIMINAR.
 //class Drop{
