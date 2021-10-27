@@ -6,13 +6,14 @@ import recursos.*
 class Personaje {
     var property stamina
 	var property position = game.origin()
+	var property coins = 0
 	var dir = derecha
 	var  property nivel = 1
 	var exp = 0
 	var property vida
 	var property poder
 	var property arma = null
-	const property mochila = inventario
+	const property mochila = new Inventario()
 	
 	method image() = "pj-demo-"+ self.sufijo() +".png"
 	
@@ -21,13 +22,9 @@ class Personaje {
 		dir = direccion.cambiar(dir)
 	}
 	
-	method irA(nuevaPosicion){
-		position = nuevaPosicion
-	}
+	method irA(nuevaPosicion){position = nuevaPosicion}
 	
-	method sufijo(){
-		return dir.sufijo()
-	}
+	method sufijo(){return dir.sufijo()}
 	
 	method recuperarStamina(cantidad){ if (self.noTieneFullStamina()){ stamina += cantidad } }
 	
@@ -124,19 +121,19 @@ class Personaje {
 	}
 	
 }
-
-object inventario{
+class Inventario{
 	const property mochilaPersonaje = []
 	
 	method agregar(elemento){
 		mochilaPersonaje.add(elemento)
-		elemento.agregadoEn(self)
+		//elemento.agregadoEn(self)
 	}
 	method eliminar(elemento){
 		mochilaPersonaje.remove(elemento)
-		elemento.agregadoEn(null)
-		elemento.position()
+		//elemento.agregadoEn(null)
+		//elemento.position()
 	}
+
 	method tiene(elemento){
 		return mochilaPersonaje.contains(elemento)
 	}

@@ -7,7 +7,6 @@ import recursos.*
 object tutorial {
 	method iniciar(){
 		visual.personaje()
-		visual.armas()
 		visual.enemigos()
 		config.sonido()
 		config.configurarTeclas()
@@ -22,21 +21,16 @@ object visual{
 		game.showAttributes(player)
 	}
 	
-	method armas(){
-		//game.addVisual(hacha)
-		//game.addVisual(espada)
-		//game.addVisual(lanza)
-		//game.addVisual(daga)
-	}
 	method enemigos(){
 		game.addVisual(escorpion)
-		game.addVisual(hiena)
-		game.addVisual(goblin)
-		game.addVisual(brujo)
 		game.showAttributes(escorpion)
-		game.showAttributes(hiena)
-		game.showAttributes(brujo)
-		game.showAttributes(goblin)
+//		game.addVisual(hiena)
+//		game.addVisual(goblin)
+//		game.addVisual(brujo)
+		
+//		game.showAttributes(hiena)
+//		game.showAttributes(brujo)
+//		game.showAttributes(goblin)
 	}
 }
 
