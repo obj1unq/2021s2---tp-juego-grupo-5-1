@@ -19,7 +19,7 @@ class Personaje {
 	
 	//------------------------------------------------------------------------
 	method tomarOro(oro){
-		mochila.sumarOro(oro.cantidad())
+		mochila.sumarOro(oro.cantidad()) 
 	}
 	//------------------------------------------------------------------------
 	
