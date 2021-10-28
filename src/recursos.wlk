@@ -74,11 +74,4 @@ object pocasMonedasDeOro inherits Oro(cantidad = (1 .. 5).anyOne()){}
 object moderadasMonedasDeOro inherits Oro(cantidad = (6 .. 10).anyOne()){}
 object muchasMonedasDeOro inherits Oro(cantidad = (11 .. 20).anyOne()){}
 
-	
-
-
-
-
-
-
 

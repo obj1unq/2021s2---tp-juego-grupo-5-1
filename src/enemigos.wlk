@@ -1,3 +1,4 @@
+
 import wollok.game.*
 import personaje.*
 import recursos.*
@@ -74,3 +75,4 @@ const brujo = new EnemigoFinal(position=game.at(15,5),hp = 20,expQueOtorga=5,gol
 //	
 //	method x(){return new Enemig }
 //}
+
