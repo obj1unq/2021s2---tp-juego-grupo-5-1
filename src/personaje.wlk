@@ -13,6 +13,16 @@ class Personaje {
 	var property poder
 	var property arma = null
 	const property mochila = inventario
+	var property orito = mochila.cantidadDeOro() // PORQUE NO ME LEVANTA LA CANTIDAD DE ORO QUE TENGO EN EL INVENTARIO???
+	
+	
+	
+	//------------------------------------------------------------------------
+	method tomarOro(oro){
+		mochila.sumarOro(oro.cantidad())
+	}
+	//------------------------------------------------------------------------
+	
 	
 	method image() = "pj-demo-"+ self.sufijo() +".png"
 	
@@ -127,7 +137,13 @@ class Personaje {
 
 object inventario{
 	const property mochilaPersonaje = []
+	var property cantidadDeOro = 0
 	
+	// --------------------------------------------
+	method sumarOro(cantidad){   
+		cantidadDeOro += cantidad 
+	}
+	//--------------------------------------------------
 	method agregar(elemento){
 		mochilaPersonaje.add(elemento)
 		elemento.agregadoEn(self)

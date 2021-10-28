@@ -18,7 +18,13 @@ class Enemigo {
 		if(self.noTieneMasVida()){
 			game.removeVisual(self)
 			self.soltarDrop()
+			self.darRecompensaEnOro() // !!!!!
 		}
+	}
+	
+	method darRecompensaEnOro(){
+		player.tomarOro(pocasMonedasDeOro) // esto solo es un caso de un monstruo de nivel bajo, se soluciona con inherit
+		//player.mochila().sumarOro()
 	}
 	
 	method soltarDrop(){ 
