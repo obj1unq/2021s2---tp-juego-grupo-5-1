@@ -9,6 +9,7 @@ class Enemigo {
 	const property expQueOtorga = 2
 	var property golpe = 1
 	var property image
+	const oroQueDa = (1 .. 10).anyOne()
 		
 	method pierdeVida(poder){
 		hp = (hp - poder).max(0)
@@ -19,14 +20,15 @@ class Enemigo {
 		if(self.noTieneMasVida()){
 			game.removeVisual(self)
 			self.soltarDrop()
-			self.darRecompensaEnOro() // !!!!!
+			inventario.sumarOro(oroQueDa) // !!!!!
 		}
 	}
 	
-	method darRecompensaEnOro(){
-		player.tomarOro(pocasMonedasDeOro) // esto solo es un caso de un monstruo de nivel bajo, se soluciona con inherit
-		//player.mochila().sumarOro()
-	}
+//	method darRecompensaEnOro(){
+//		player.orito() + oroQueDa
+//		//player.tomarOro(pocasMonedasDeOro) // esto solo es un caso de un monstruo de nivel bajo, se soluciona con inherit
+//		//player.mochila().sumarOro()
+//	}
 	
 	method soltarDrop(){ 
 	    // se arma un drop en base a una lista de objetos, de momento se me ocurre armar una lista segun la clase de enemigo
@@ -65,14 +67,4 @@ const escorpion = new Enemigo(image="escorpion.png",position=game.at(8,8))
 const hiena = new Enemigo(image="hiena.png",position=game.at(8,5))
 const goblin = new Enemigo(image="enemigos/Goblin/Idle/1.png",position=game.at(3,5))
 const brujo = new EnemigoFinal(position=game.at(15,5),hp = 20,expQueOtorga=5,golpe=2,image="enemigo.png")
-
-//   SE INTENTO HACER UN DROP EN LA POSICIÓN DEL ENEMIGO A ELIMINAR.
-//class Drop{
-//	const property enemigo = new Enemigo()
-//	var oro = 100
-//	var property item
-//	var property position = 
-//	
-//	method x(){return new Enemig }
-//}
 

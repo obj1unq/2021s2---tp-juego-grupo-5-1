@@ -13,14 +13,12 @@ class Personaje {
 	var property poder
 	var property arma = null
 	const property mochila = inventario
-	var property orito = mochila.cantidadDeOro() // PORQUE NO ME LEVANTA LA CANTIDAD DE ORO QUE TENGO EN EL INVENTARIO???
+	 // PORQUE NO ME LEVANTA LA CANTIDAD DE ORO QUE TENGO EN EL INVENTARIO???
 	
 	
 	
 	//------------------------------------------------------------------------
-	method tomarOro(oro){
-		mochila.sumarOro(oro.cantidad()) 
-	}
+	
 	//------------------------------------------------------------------------
 	
 	
@@ -172,8 +170,6 @@ object inventario{
 		return x
 	}
 }
-
-
 
 //DEFINICION DE PLAYER 1 
 const player = new Personaje(stamina = 5,poder = 5,vida = 10)

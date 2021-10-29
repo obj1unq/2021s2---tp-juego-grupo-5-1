@@ -1,4 +1,3 @@
-
 import wollok.game.*
 import enemigos.*
 import personaje.*
@@ -13,6 +12,8 @@ object tutorial {
 		config.sonido()
 		config.configurarTeclas()
 		config.configurarStamina()
+		
+		game.addVisual(mostrarOro)
 	}
 	
 }
@@ -21,6 +22,7 @@ object visual{
 	method personaje(){
 		game.addVisual(player)
 		game.showAttributes(player)
+		
 	}
 	
 	method armas(){
@@ -86,4 +88,3 @@ object config{
     }
 	
 }
-
