@@ -20,15 +20,13 @@ class Enemigo {
 		if(self.noTieneMasVida()){
 			game.removeVisual(self)
 			self.soltarDrop()
-			inventario.sumarOro(oroQueDa) // !!!!!
+			self.darRecompensaDeOro()
 		}
 	}
 	
-//	method darRecompensaEnOro(){
-//		player.orito() + oroQueDa
-//		//player.tomarOro(pocasMonedasDeOro) // esto solo es un caso de un monstruo de nivel bajo, se soluciona con inherit
-//		//player.mochila().sumarOro()
-//	}
+	method darRecompensaDeOro(){
+		inventario.sumarOro(oroQueDa)
+	}
 	
 	method soltarDrop(){ 
 	    // se arma un drop en base a una lista de objetos, de momento se me ocurre armar una lista segun la clase de enemigo
@@ -48,9 +46,6 @@ class Enemigo {
 		return hp == 0
 	}
 	
-//	method neutral(){
-//		return false	
-//	}
 	method validarGuardado(){self.error("No se puede guardar a un enemigo")}
 	
 }
