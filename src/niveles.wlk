@@ -52,7 +52,7 @@ object config{
 		
 		keyboard.s().onPressDo({player.guardar()})
 		
-		keyboard.q().onPressDo({player.curarse()})
+		//keyboard.q().onPressDo({player.curarse()})
 //		keyboard.i().onPressDo({personaje.abrirInventario()})
 	}
 	
@@ -63,10 +63,10 @@ object config{
 	}
 	
 	method equiparse(){
-		keyboard.num1().onPressDo({player.armarse(espada)})
-		keyboard.num2().onPressDo({player.armarse(hacha)})
-		keyboard.num3().onPressDo({player.armarse(daga)})
-		keyboard.num4().onPressDo({player.armarse(lanza)})
+//		keyboard.num1().onPressDo({player.lanzar(fuego)})
+//		keyboard.num2().onPressDo({player.lanzar(rayo)})
+//		keyboard.num3().onPressDo({player.lanzar(hielo)})
+//		keyboard.num4().onPressDo({player.lanzar(escudo)})
 	}
 	
 	method movimientos(){
@@ -78,15 +78,15 @@ object config{
 	}
 	
 	method potas(){
-		keyboard.q().onPressDo({player.curarse()})
-		//keyboard.w().onPressDo({personaje.curarse(larga)})
+//		keyboard.q().onPressDo({player.usarPocion(vida)})
+//		keyboard.w().onPressDo({player.usarPocion(mana)})
 		//keyboard.e().onPressDo({personaje.curarse(stamina)})
 		//keyboard.r().onPressDo({personaje.curarse(veneno)})
 	}
 	
-	
-	method configurarStamina(){
-	   game.onTick(900, "STAMINA", { player.recuperarStamina(1)})
-    }
+//	
+//	method configurarStamina(){
+//	   game.onTick(900, "STAMINA", { player.recuperarStamina(1)})
+//    }
 	
 }

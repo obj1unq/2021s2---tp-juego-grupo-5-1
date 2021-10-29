@@ -29,14 +29,8 @@ class Arma {
 		}
 	}
 }
-
-object espada inherits Arma(position=player.position(),image="items/espada.png",poder=4){}
-object hacha  inherits Arma(position=player.position(),image="items/hacha.png",poder=7){}
-object lanza  inherits Arma(position=player.position(),image="items/lanza.png",poder=5){}
-object daga   inherits Arma(position=player.position(),image="items/daga.png",poder=3){}
-
 	
-class Cura{
+class Pocion{
 	var property position
 	const property poder
 	var property image
@@ -46,10 +40,7 @@ class Cura{
 		_personaje.sumarVida(poder)
 		game.removeVisual(self)
 	}
-	
-	method neutral(){
-		return true	
-	}
+
 	method validarGuardado(){}
 	
 	method agregadoEn(_contenedor){
@@ -64,7 +55,8 @@ class Cura{
 		}
 	}
 }
-object curacion inherits Cura(position=player.position(),poder = 10,image = "vida.png"){}
+
+
 
 class Oro{
 	var property cantidad 

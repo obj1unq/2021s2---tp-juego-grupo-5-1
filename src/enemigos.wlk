@@ -19,7 +19,7 @@ class Enemigo {
 	method muere(){
 		if(self.noTieneMasVida()){
 			game.removeVisual(self)
-			self.soltarDrop()
+			//self.soltarDrop()
 			self.darRecompensaDeOro()
 		}
 	}
@@ -28,24 +28,25 @@ class Enemigo {
 		inventario.sumarOro(oroQueDa)
 	}
 	
-	method soltarDrop(){ 
-	    // se arma un drop en base a una lista de objetos, de momento se me ocurre armar una lista segun la clase de enemigo
-	    // diferenciandolos por enemigos base, bosses, etc..
-		const item = self.posiblesDrops().anyOne()
-		
-		if(not game.hasVisual(item))
-		game.addVisual(item)
-		else{}
-	}
+//	method soltarDrop(){ 
+//	    // se arma un drop en base a una lista de objetos, de momento se me ocurre armar una lista segun la clase de enemigo
+//	    // diferenciandolos por enemigos base, bosses, etc..
+//		const item = self.posiblesDrops().anyOne()
+//		
+//		if(not game.hasVisual(item))
+//		game.addVisual(item)
+//		else{}
+//	}
 	
-	method posiblesDrops(){
-		return [curacion,hacha, espada]
-	}
-	
+//	method posiblesDrops(){
+//		return [curacion,hacha, espada]
+//	}
+//	
 	method noTieneMasVida(){
 		return hp == 0
 	}
 	
+
 	method validarGuardado(){self.error("No se puede guardar a un enemigo")}
 	
 }

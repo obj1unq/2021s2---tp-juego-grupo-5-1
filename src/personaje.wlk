@@ -74,12 +74,12 @@ class Personaje {
 		self.perder()
 	}
 	
-	method curarse(){
-		self.contiene(curacion)
-		curacion.usar(self)
-		self.remove(curacion)
-	}
-	
+//	method curarse(){
+//		self.contiene(curacion)
+//		curacion.usar(self)
+//		self.remove(curacion)
+//	}
+//	
 	method sumarVida(x){vida = (vida + x).min(10)}
 	
 	
