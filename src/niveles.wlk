@@ -11,11 +11,11 @@ object tutorial {
 		visual.enemigos()
 		config.sonido()
 		config.configurarTeclas()
-		config.configurarStamina()
+//		config.configurarStamina()
 		
 		game.addVisual(mostrarOro)
 		
-		game.cellSize(60)
+		game.cellSize(45)
 	}
 	
 }

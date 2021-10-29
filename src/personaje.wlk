@@ -6,7 +6,7 @@ import recursos.*
 class Personaje {
     var property mana
 	var property position = game.origin()
-	var dir = derecha
+	var direccion = derecha
 	var  property nivel = 1
 	var exp = 0
 	var property vida
@@ -14,11 +14,11 @@ class Personaje {
 	var property arma = null
 	const property mochila = inventario
 	
-	method image() = "pj-demo-"+ self.sufijo() +".png"
+	method image() = "pj-"+ self.sufijo() +".png"
 	
-	method mover(direccion){
-		self.irA(direccion.siguiente(self.position()))
-		dir = direccion.cambiar(dir)
+	method mover(_direccion){
+		direccion = _direccion
+		self.irA(_direccion.siguiente(self.position()))
 	}
 	
 	method irA(nuevaPosicion){
@@ -26,7 +26,7 @@ class Personaje {
 	}
 	
 	method sufijo(){
-		return dir.sufijo()
+		return direccion.sufijo()
 	}
 	
 	method recuperarMana(cantidad){ if (self.noTieneFullMana()){ mana += cantidad } }

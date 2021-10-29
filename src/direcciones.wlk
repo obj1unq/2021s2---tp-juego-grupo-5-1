@@ -5,10 +5,7 @@ object arriba {
 	}
 	
 	method sufijo(){
-		return "der"
-	}
-	method cambiar(dirOriginal){
-		return dirOriginal
+		return "up"
 	}
 }
 
@@ -18,10 +15,7 @@ object abajo {
 	}
 	
 	method sufijo(){
-		return "der"
-	}
-	method cambiar(dirOriginal){
-		return dirOriginal
+		return "down"
 	}
 }
 
@@ -34,9 +28,6 @@ object izquierda {
 	method sufijo(){
 		return "izq"
 	}
-	method cambiar(dirOriginal){
-		return self
-	}
 }
 
 object derecha {
@@ -46,8 +37,5 @@ object derecha {
 	
 	method sufijo(){
 		return "der"
-	}
-	method cambiar(dirOriginal){
-		return self
 	}
 }
