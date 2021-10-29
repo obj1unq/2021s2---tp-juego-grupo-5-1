@@ -4,7 +4,7 @@ import enemigos.*
 import recursos.*
 
 class Personaje {
-    var property stamina
+    var property mana
 	var property position = game.origin()
 	var dir = derecha
 	var  property nivel = 1
@@ -13,14 +13,6 @@ class Personaje {
 	var property poder
 	var property arma = null
 	const property mochila = inventario
-	 // PORQUE NO ME LEVANTA LA CANTIDAD DE ORO QUE TENGO EN EL INVENTARIO???
-	
-	
-	
-	//------------------------------------------------------------------------
-	
-	//------------------------------------------------------------------------
-	
 	
 	method image() = "pj-demo-"+ self.sufijo() +".png"
 	
@@ -37,15 +29,13 @@ class Personaje {
 		return dir.sufijo()
 	}
 	
-	method recuperarStamina(cantidad){ if (self.noTieneFullStamina()){ stamina += cantidad } }
+	method recuperarMana(cantidad){ if (self.noTieneFullMana()){ mana += cantidad } }
 	
-	method noTieneFullStamina(){ return stamina < 5 }
-	
-    method gastaStamina(cantidad){ stamina -= cantidad } 
+	method noTieneFullMana(){ return mana < 100 }
     
-    method validarStamina(){ if(self.estaCansado()){ self.error("no hay Stamina para poder atacar") } }
+    method validarMana(){ if(self.agotoMana()){ self.error("no hay Mana para poder atacar") } }
 	
-	method estaCansado(){ return stamina == 0 }
+	method agotoMana(){ return mana == 0 }
 
 	method contiene(elemento){
 		if(not mochila.tiene(elemento)){
@@ -57,8 +47,6 @@ class Personaje {
 	
 	
     method atacar(enemigo){
-		self.validarStamina()
-        self.gastaStamina(1)
         enemigo.pierdeVida(poder)
         self.subirDeNivel(enemigo.expQueOtorga())
 	}
@@ -172,4 +160,4 @@ object inventario{
 }
 
 //DEFINICION DE PLAYER 1 
-const player = new Personaje(stamina = 5,poder = 5,vida = 10)
+const player = new Personaje(mana = 100,poder = 5,vida = 10)

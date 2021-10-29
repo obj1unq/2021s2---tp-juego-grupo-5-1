@@ -14,6 +14,8 @@ object tutorial {
 		config.configurarStamina()
 		
 		game.addVisual(mostrarOro)
+		
+		game.cellSize(60)
 	}
 	
 }
