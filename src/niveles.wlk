@@ -7,24 +7,35 @@ import recursos.*
 object tutorial {
 	method iniciar(){
 		visual.personaje()
-		visual.armas()
+		//visual.armas()
+		
 		visual.enemigos()
-		config.sonido()
+		//config.sonido()
 		config.configurarTeclas()
 //		config.configurarStamina()
 		
 		game.addVisual(mostrarOro)
 		
 		game.cellSize(45)
+		game.schedule(2000,{dialogo.inicial()})
 	}
 	
 }
-
+object dialogo {
+	
+	const tutorial = ["Hola guerrero","Necesito tu ayuda","para eliminar a los enemigos","Acercate al enemigo y","presiona la tecla A para atacar","cuando mueran nos daran oro"]
+	
+	method inicial(){
+		tutorial.forEach({
+			texto =>
+			game.say(player,texto)
+		})
+	}
+}
 object visual{
 	method personaje(){
 		game.addVisual(player)
 		game.showAttributes(player)
-		
 	}
 	
 	method armas(){
