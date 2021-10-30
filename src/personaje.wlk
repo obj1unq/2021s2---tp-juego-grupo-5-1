@@ -2,16 +2,16 @@ import wollok.game.*
 import direcciones.*
 import enemigos.*
 import recursos.*
+import hechizos.*
 
 class Personaje {
     var property mana
 	var property position = game.origin()
 	var direccion = derecha
-	var  property nivel = 1
-	var exp = 0
+	var property nivel = 1
+	var property hechizosAprendidos = [fuego, rayo]
 	var property vida
 	var property poder
-	var property arma = null
 	const property mochila = inventario
 	
 	method image() = "pj-"+ self.sufijo() +".png"
@@ -32,8 +32,6 @@ class Personaje {
 	method recuperarMana(cantidad){ if (self.noTieneFullMana()){ mana += cantidad } }
 	
 	method noTieneFullMana(){ return mana < 100 }
-    
-    method validarMana(){ if(self.agotoMana()){ self.error("no hay Mana para poder atacar") } }
 	
 	method agotoMana(){ return mana == 0 }
 
@@ -48,13 +46,37 @@ class Personaje {
 	//
 	
 	method lanzar(hechizo){
+		self.validarSiSePuedeLanzar(hechizo)
 		const enemigos = game.colliders(self)
 		enemigos.forEach({ enemigo => 
-			enemigo.perderVida(hechizo.damage())
+			enemigo.pierdeVida(hechizo.damage())
+			self.gastarMana(hechizo)
 			self.subirDeNivel(enemigo.expQueOtorga())
 			self.perderVida(enemigo.golpe())
 		})
 	}
+	
+	method gastarMana(hechizo){
+		mana -= hechizo.manaRequerida().max(0)
+	}
+	
+	method validarSiSePuedeLanzar(hechizo){
+		self.validarSiAprendio(hechizo)
+		self.validarSiAlcanzaElMana(hechizo)
+	}
+	
+	method validarSiAprendio(hechizo){
+		if(! self.hechizosAprendidos().contains(hechizo)){
+			self.error("no aprendí el hechizo " + hechizo.toString())
+		}
+	}
+	
+	method validarSiAlcanzaElMana(hechizo){
+		if(hechizo.manaRequerida() > self.mana() || self.agotoMana()){
+			self.error("no hay suficiente mana para lanzar " + hechizo.toString())
+		}
+	}
+	
 	
 	//
 //	
@@ -108,6 +130,7 @@ class Personaje {
 	}
 
 	method subirDeNivel(_exp){
+		var exp = 0
 		exp += _exp
 		if(exp >= 10 * nivel){
 			nivel += 1

@@ -3,6 +3,7 @@ import enemigos.*
 import personaje.*
 import direcciones.*
 import recursos.*
+import hechizos.*
 
 object tutorial {
 	method iniciar(){
@@ -58,7 +59,7 @@ object visual{
 
 object config{
 	method configurarTeclas(){
-		self.equiparse()
+		self.hechizos()
 		self.movimientos()
 		
 		keyboard.s().onPressDo({player.guardar()})
@@ -73,11 +74,11 @@ object config{
 		game.schedule(500, { sonido.play()} )
 	}
 	
-	method equiparse(){
-//		keyboard.num1().onPressDo({player.lanzar(fuego)})
-//		keyboard.num2().onPressDo({player.lanzar(rayo)})
-//		keyboard.num3().onPressDo({player.lanzar(hielo)})
-//		keyboard.num4().onPressDo({player.lanzar(escudo)})
+	method hechizos(){
+		keyboard.num1().onPressDo({player.lanzar(fuego)})
+		keyboard.num2().onPressDo({player.lanzar(rayo)})
+		keyboard.num3().onPressDo({player.lanzar(hielo)})
+		keyboard.num4().onPressDo({player.lanzar(escudo)})
 	}
 	
 	method movimientos(){
@@ -85,7 +86,7 @@ object config{
 		keyboard.right().onPressDo({ player.mover(derecha)})
 		keyboard.up().onPressDo(   { player.mover(arriba)})
 		keyboard.down().onPressDo( { player.mover(abajo)})
-		keyboard.a().onPressDo({player.atacarEnemigoAdelante()})
+//		keyboard.a().onPressDo({player.atacarEnemigoAdelante()})
 	}
 	
 	method potas(){

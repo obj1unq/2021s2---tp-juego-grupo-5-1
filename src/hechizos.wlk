@@ -1,10 +1,10 @@
 class Hechizo {
 	var property damage 
-	var property aprendido
+	var property manaRequerida
 	
 }
 
-object fuego inherits Hechizo(damage=10,aprendido=false){}
-object rayo inherits Hechizo(damage=9,aprendido=false){}
-object hielo inherits Hechizo(damage=3,aprendido=false){}
-object escudo inherits Hechizo(damage=0,aprendido=false){}
+object fuego inherits Hechizo(damage=2,manaRequerida=20){}
+object rayo inherits Hechizo(damage=3,manaRequerida=20){}
+object hielo inherits Hechizo(damage=1,manaRequerida=20){}
+object escudo inherits Hechizo(damage=0,manaRequerida=20){}

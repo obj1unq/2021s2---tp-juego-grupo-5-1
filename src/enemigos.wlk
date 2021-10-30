@@ -62,5 +62,5 @@ class EnemigoFinal inherits Enemigo{
 const escorpion = new Enemigo(image="escorpion.png",position=game.at(8,8))
 const hiena = new Enemigo(image="hiena.png",position=game.at(8,5))
 const goblin = new Enemigo(image="enemigos/Goblin/Idle/1.png",position=game.at(3,5))
-const brujo = new EnemigoFinal(position=game.at(15,5),hp = 20,expQueOtorga=5,golpe=2,image="enemigo.png")
+const brujo = new EnemigoFinal(image="enemigo.png",position=game.at(15,5),hp = 20,expQueOtorga=5,golpe=2)
 
