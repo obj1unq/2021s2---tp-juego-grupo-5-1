@@ -39,12 +39,6 @@ object visual{
 		game.showAttributes(player)
 	}
 	
-	method armas(){
-		//game.addVisual(hacha)
-		//game.addVisual(espada)
-		//game.addVisual(lanza)
-		//game.addVisual(daga)
-	}
 	method enemigos(){
 		game.addVisual(escorpion)
 		game.addVisual(hiena)
@@ -64,8 +58,8 @@ object config{
 		
 		keyboard.s().onPressDo({player.guardar()})
 		
-		//keyboard.q().onPressDo({player.curarse()})
-//		keyboard.i().onPressDo({personaje.abrirInventario()})
+		// keyboard.q().onPressDo({player.curarse()})
+		// keyboard.i().onPressDo({personaje.abrirInventario()})
 	}
 	
 	method sonido(){

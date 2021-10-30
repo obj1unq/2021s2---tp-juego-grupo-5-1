@@ -1,35 +1,35 @@
 import wollok.game.*
 import personaje.*
 
-class Arma {
-	var property position
-	var property poder
-	var property image
-	var contenedor = null
-	
-	method usar(_personaje){
-		_personaje.arma(self)
-		_personaje.poder(self.poder())
-	}
-	
-	method neutral(){
-		return true
-	}
-	method validarGuardado(){}
-	
-	method agregadoEn(_contenedor){
-		contenedor = _contenedor
-	}
-	
-	method position(){
-		return if(contenedor != null){
-			contenedor.dondeEstoy(self)
-		}else{
-			position
-		}
-	}
-}
-	
+//class Arma {
+//	var property position
+//	var property poder
+//	var property image
+//	var contenedor = null
+//	
+//	method usar(_personaje){
+//		_personaje.arma(self)
+//		_personaje.poder(self.poder())
+//	}
+//	
+//	method neutral(){
+//		return true
+//	}
+//	method validarGuardado(){}
+//	
+//	method agregadoEn(_contenedor){
+//		contenedor = _contenedor
+//	}
+//	
+//	method position(){
+//		return if(contenedor != null){
+//			contenedor.dondeEstoy(self)
+//		}else{
+//			position
+//		}
+//	}
+//}
+//	
 class Pocion{
 	var property position
 	const property poder

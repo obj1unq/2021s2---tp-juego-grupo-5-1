@@ -12,6 +12,7 @@ class Personaje {
 	var property hechizosAprendidos = [fuego, rayo]
 	var property vida
 	var property poder
+	var exp = 0
 	const property mochila = inventario
 	
 	method image() = "pj-"+ self.sufijo() +".png"
@@ -43,7 +44,6 @@ class Personaje {
 	
 	method remove(elemento){mochila.eliminar(elemento)}
 	
-	//
 	
 	method lanzar(hechizo){
 		self.validarSiSePuedeLanzar(hechizo)
@@ -78,29 +78,8 @@ class Personaje {
 	}
 	
 	
-	//
-//	
-//    method atacar(enemigo){
-//        enemigo.pierdeVida(poder)
-//        self.subirDeNivel(enemigo.expQueOtorga())
-//	}
-//	
-//    method atacarEnemigoAdelante(){
-//    	const enemigos = game.colliders(self)
-//		enemigos.forEach({
-//			enemigo => self.atacar(enemigo)
-//			self.perderVida(enemigo.golpe())
-//		})
-//	}
-	
 	method faltanEnemigos(){
 		return game.hasVisual(brujo)
-	}
-	
-	method armarse(_arma){
-		self.contiene(_arma)
-		_arma.usar(self)
-		//self.remove(_arma)
 	}
 	
 	method perderVida(x){
@@ -130,7 +109,6 @@ class Personaje {
 	}
 
 	method subirDeNivel(_exp){
-		var exp = 0
 		exp += _exp
 		if(exp >= 10 * nivel){
 			nivel += 1
