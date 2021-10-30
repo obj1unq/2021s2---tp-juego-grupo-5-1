@@ -71,3 +71,4 @@ object mostrarOro{
 	method text() = "oro:  " + inventario.cantidadDeOro()
 }
 
+
