@@ -9,11 +9,12 @@ class Personaje {
 	var property position = game.origin()
 	var direccion = derecha
 	var property nivel = 1
-	var property hechizosAprendidos = [fuego, rayo]
+	var property hechizosAprendidos = #{fuego}//----
 	var property vida
 	var property poder
 	var exp = 0
 	const property mochila = inventario
+	var estaEnElTemplo = false
 	
 	method image() = "pj-"+ self.sufijo() +".png"
 	
@@ -115,8 +116,46 @@ class Personaje {
 			exp = 0
 			vida += 2
 			poder += 1
+			self.aprenderNuevoHechizo()
 		}
 	}
+	
+	//-------------------------------------------------------
+	method aprenderNuevoHechizo(){
+		if(self.esNivel(2)){
+			hechizosAprendidos.add(escudo)
+		}
+		else if(self.esNivel(5)){
+			hechizosAprendidos.add(rayo)
+		}
+		else if(self.esNivel(10)){
+			hechizosAprendidos.add(hielo)
+		}
+		else{}  // dejar pelado esto no se si esta bien, hay codigo repetido tampoco se si esta bien.	
+	}
+	
+	method esNivel(numero){
+		return nivel == numero
+	}
+	
+	method concentrar(){
+		self.valirdarQueEstaEnTemplo()
+		mana += 20
+	}
+	
+	method valirdarQueEstaEnTemplo(){
+		if(! self.estaEnTemplo()){
+			self.error("No puedo concentrar si no estoy en el templo!")
+		}
+	}
+	
+	method estaEnTemplo(){  
+	 return estaEnElTemplo == true // NO SE ME OCURRE COMO HACER ESTO SIN COMPARAR CON UN BOOLEANO
+	}
+	
+	
+	
+	//---------------------------------------------------------
 
 	method ganar(){
 		if(!self.faltanEnemigos()){

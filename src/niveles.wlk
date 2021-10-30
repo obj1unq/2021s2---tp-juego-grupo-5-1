@@ -1,4 +1,4 @@
-import wollok.game.*
+ import wollok.game.*
 import enemigos.*
 import personaje.*
 import direcciones.*
@@ -73,6 +73,7 @@ object config{
 		keyboard.num2().onPressDo({player.lanzar(rayo)})
 		keyboard.num3().onPressDo({player.lanzar(hielo)})
 		keyboard.num4().onPressDo({player.lanzar(escudo)})
+		keyboard.c().onPressDo({player.concentrar()})
 	}
 	
 	method movimientos(){
