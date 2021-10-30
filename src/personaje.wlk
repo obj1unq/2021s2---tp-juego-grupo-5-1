@@ -14,7 +14,6 @@ class Personaje {
 	var property poder
 	var exp = 0
 	const property mochila = inventario
-	var estaEnElTemplo = false
 	
 	method image() = "pj-"+ self.sufijo() +".png"
 	
@@ -150,7 +149,7 @@ class Personaje {
 	}
 	
 	method estaEnTemplo(){  
-	 return estaEnElTemplo == true // NO SE ME OCURRE COMO HACER ESTO SIN COMPARAR CON UN BOOLEANO
+	 return game.colliders(self).contains(temploDeMana)
 	}
 	
 	

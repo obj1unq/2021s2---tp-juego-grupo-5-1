@@ -16,6 +16,7 @@ object tutorial {
 //		config.configurarStamina()
 		
 		game.addVisual(mostrarOro)
+		game.addVisual(temploDeMana)
 		
 		game.cellSize(45)
 		game.schedule(2000,{dialogo.inicial()})

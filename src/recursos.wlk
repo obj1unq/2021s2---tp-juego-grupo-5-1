@@ -71,4 +71,11 @@ object mostrarOro{
 	method text() = "oro:  " + inventario.cantidadDeOro()
 }
 
+class Templo{
+	var property position 
+	var property image
+	
+}
 
+//DEFINICION DE TEMPLO
+const temploDeMana = new Templo (position = game.at(2,2), image= "vida.png")
