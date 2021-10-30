@@ -45,19 +45,31 @@ class Personaje {
 	
 	method remove(elemento){mochila.eliminar(elemento)}
 	
+	//
 	
-    method atacar(enemigo){
-        enemigo.pierdeVida(poder)
-        self.subirDeNivel(enemigo.expQueOtorga())
-	}
-	
-    method atacarEnemigoAdelante(){
-    	const enemigos = game.colliders(self)
-		enemigos.forEach({
-			enemigo => self.atacar(enemigo)
+	method lanzar(hechizo){
+		const enemigos = game.colliders(self)
+		enemigos.forEach({ enemigo => 
+			enemigo.perderVida(hechizo.damage())
+			self.subirDeNivel(enemigo.expQueOtorga())
 			self.perderVida(enemigo.golpe())
 		})
 	}
+	
+	//
+//	
+//    method atacar(enemigo){
+//        enemigo.pierdeVida(poder)
+//        self.subirDeNivel(enemigo.expQueOtorga())
+//	}
+//	
+//    method atacarEnemigoAdelante(){
+//    	const enemigos = game.colliders(self)
+//		enemigos.forEach({
+//			enemigo => self.atacar(enemigo)
+//			self.perderVida(enemigo.golpe())
+//		})
+//	}
 	
 	method faltanEnemigos(){
 		return game.hasVisual(brujo)
