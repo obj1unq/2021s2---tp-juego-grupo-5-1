@@ -118,8 +118,8 @@ class Personaje {
 	method subirDeNivel(_exp){
 		exp += _exp
 		if(exp >= 10 * nivel){
+			exp -= 10 * nivel
 			nivel += 1
-			exp = 0
 			vida += 2
 			poder += 1
 			self.aprenderNuevoHechizo()
