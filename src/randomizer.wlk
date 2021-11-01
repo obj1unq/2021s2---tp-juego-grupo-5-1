@@ -3,8 +3,8 @@ object randomizer {
         
     method position() {
         return     game.at( 
-                    (2 .. game.width() - 2 ).anyOne(),
-                    (2..  game.height() - 2).anyOne()
+                    (0 .. game.width() - 2 ).anyOne(),
+                    (1..  game.height() - 8).anyOne()
         ) 
     }
     
