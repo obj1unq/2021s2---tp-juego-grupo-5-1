@@ -4,7 +4,7 @@ import enemigos.*
 import personaje.*
 import hechizos.*
 
-test "lanzar fuego" {
+test "lanzar fuego y subir nivel" {
 	player.position(game.origin())
 	const enemigoPrueba = new Hongo(position = game.origin())
 	game.addVisual(player)
@@ -14,5 +14,14 @@ test "lanzar fuego" {
 	assert.equals(80,player.mana())
 	assert.equals(2,player.exp())
 	assert.equals(8,enemigoPrueba.hp())
-
+	player.lanzar(fuego)
+	player.lanzar(fuego)
+	player.lanzar(fuego)
+	player.lanzar(fuego)
+	assert.equals(7,player.vida())
+	assert.equals(0,player.mana())
+	assert.equals(0,player.exp())
+	assert.equals(2,player.nivel())
+	assert.equals(6,player.poder())
+	assert.that(not game.allVisuals().contains(enemigoPrueba))
 }
