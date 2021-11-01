@@ -9,10 +9,10 @@ class Personaje {
 	var property position = game.origin()
 	var direccion = derecha
 	var property nivel = 1
-	var property hechizosAprendidos = #{fuego,ataqueDeFuego,ataqueDeHielo,ataqueDeRayo}//----
+	var property hechizosAprendidos = #{fuego,ataqueDeFuego}//----
 	var property vida
 	var property poder
-	var exp = 0
+	var property exp = 0
 	const property mochila = inventario
 	
 	method image() = "pj-"+ self.sufijo() +".png"

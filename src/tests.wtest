@@ -1,6 +1,18 @@
+import wollok.game.*
+import personaje.*
+import enemigos.*
+import personaje.*
+import hechizos.*
 
-test "testX" {
-
-	assert.that(true)
+test "lanzar fuego" {
+	player.position(game.origin())
+	const enemigoPrueba = new Hongo(position = game.origin())
+	game.addVisual(player)
+	game.addVisual(enemigoPrueba)
+	player.lanzar(fuego)
+	assert.equals(9,player.vida())
+	assert.equals(80,player.mana())
+	assert.equals(2,player.exp())
+	assert.equals(8,enemigoPrueba.hp())
 
 }
