@@ -7,7 +7,7 @@ import randomizer.*
 class Enemigo {
 	var property position
 	var property hp = 10
-	const property expQueOtorga = 2
+	var property expQueOtorga = 2
 	var property golpe = 1
 	var property image
 	const oroQueDa = (1 .. 10).anyOne()
@@ -32,25 +32,15 @@ class Enemigo {
 	}
 	
 
-	
-//	method soltarDrop(){ 
-//	    // se arma un drop en base a una lista de objetos, de momento se me ocurre armar una lista segun la clase de enemigo
-//	    // diferenciandolos por enemigos base, bosses, etc..
-//		const item = self.posiblesDrops().anyOne()
-//		
-//		if(not game.hasVisual(item))
-//		game.addVisual(item)
-//		else{}
-//	}
-	
-//	method posiblesDrops(){
-//		return [curacion,hacha, espada]
-//	}
-//	
 	method noTieneMasVida(){
 		return hp == 0
 	}
-	
+	//DUPLICAR EXPERIENCIA POR 10 SEG
+	method duplicarExp(){
+		const reset = expQueOtorga
+		expQueOtorga *= 2
+		game.schedule(10000,{expQueOtorga = reset})
+	}
 
 	method validarGuardado(){self.error("No se puede guardar a un enemigo")}
 	
@@ -74,7 +64,7 @@ const esqueleto = new EnemigoFinal(image="enemigos/esqueleto.png",position=game.
 
 
 object generadorEnemigos{
-	const enemigos = #{}
+	const property enemigos = #{}
 	const max = 5
 	const factoriesEnemigos = [hongoFactory,ojoFactory,goblinFactory]	
 	
@@ -82,6 +72,7 @@ object generadorEnemigos{
 		if(self.hayQueSpawnear()){
 			const enemigo = self.spawnEnemigos()
 			game.addVisual(enemigo)
+			game.showAttributes(enemigo)
 			enemigos.add(enemigo)
 		}
 	}
@@ -98,6 +89,11 @@ object generadorEnemigos{
 	
 	method remover(enemigo){
 		enemigos.remove(enemigo)
+	}
+	
+	method setDeEnemigos(){
+		return #{esqueleto} + self.enemigos()
+		 
 	}
 }
 
@@ -118,3 +114,8 @@ object goblinFactory{
 		return new Goblin(position=randomizer.emptyPosition())
 	}
 }
+
+const listaDeEnemigos =[hongoFactory,ojoFactory,goblinFactory]
+
+
+ 

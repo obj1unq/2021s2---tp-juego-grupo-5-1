@@ -9,7 +9,7 @@ class Personaje {
 	var property position = game.origin()
 	var direccion = derecha
 	var property nivel = 1
-	var property hechizosAprendidos = #{fuego}//----
+	var property hechizosAprendidos = #{fuego,ataqueDeFuego,ataqueDeHielo,ataqueDeRayo}//----
 	var property vida
 	var property poder
 	var exp = 0
@@ -54,6 +54,13 @@ class Personaje {
 			self.subirDeNivel(enemigo.expQueOtorga())
 			self.perderVida(enemigo.golpe())
 		})
+	}
+	//ATAQUES A DISTANCIA--------------------------------------------
+	method ataqueAdistancia(tipo){
+		self.validarSiSePuedeLanzar(tipo)
+		self.gastarMana(tipo)
+		tipo.lanzar(direccion,position)
+		
 	}
 	
 	method gastarMana(hechizo){
@@ -119,40 +126,42 @@ class Personaje {
 		}
 	}
 	
-	//-------------------------------------------------------
+	//--------------------se modifico -----------------------------------
 	method aprenderNuevoHechizo(){
-		if(self.esNivel(2)){
-			hechizosAprendidos.add(escudo)
-		}
-		else if(self.esNivel(5)){
-			hechizosAprendidos.add(rayo)
-		}
-		else if(self.esNivel(10)){
-			hechizosAprendidos.add(hielo)
-		}
-		else{}  // dejar pelado esto no se si esta bien, hay codigo repetido tampoco se si esta bien.	
-	}
+		const niveles = [2,5,10]
+		niveles.forEach({x => 
+			if(self.esNivel(x)){
+				const element = listaHechizosBonus.anyOne()
+				hechizosAprendidos.add(element)
+				listaHechizosBonus.remove(element)
+			}
+		})
+	} 
 	
 	method esNivel(numero){
 		return nivel == numero
 	}
 	
 	method concentrar(){
-		self.valirdarQueEstaEnTemplo()
+		self.validarQueEstaEnTemplo(temploDeMana)
 		mana += 20
 	}
 	
-	method valirdarQueEstaEnTemplo(){
-		if(! self.estaEnTemplo()){
+	method validarQueEstaEnTemplo(tipo){
+		if(! self.estaEnTemplo(tipo)){
 			self.error("No puedo concentrar si no estoy en el templo!")
 		}
 	}
 	
-	method estaEnTemplo(){  
-	 return game.colliders(self).contains(temploDeMana)
+	method estaEnTemplo(tipo){  
+	 return game.colliders(self).contains(tipo)
 	}
 	
-	
+	//Usar templo de experiencia -------------------------
+	method experienciaDoble(){
+		self.validarQueEstaEnTemplo(temploDeExperiencia)
+		 generadorEnemigos.enemigos().forEach({enemigo => enemigo.duplicarExp()})
+	}
 	
 	//---------------------------------------------------------
 

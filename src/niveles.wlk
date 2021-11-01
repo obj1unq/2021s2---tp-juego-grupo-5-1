@@ -19,6 +19,7 @@ object tutorial {
 		
 		game.addVisual(mostrarOro)
 		game.addVisual(temploDeMana)
+		game.addVisual(temploDeExperiencia)
 		
 		game.cellSize(45)
 		//game.schedule(2000,{dialogo.inicial()})
@@ -79,6 +80,11 @@ object config{
 		keyboard.num2().onPressDo({player.lanzar(rayo)})
 		keyboard.num3().onPressDo({player.lanzar(hielo)})
 		keyboard.num4().onPressDo({player.lanzar(escudo)})
+		keyboard.g().onPressDo({player.ataqueAdistancia(ataqueDeHielo)})
+		keyboard.h().onPressDo({player.ataqueAdistancia(ataqueDeFuego)})
+		keyboard.j().onPressDo({player.ataqueAdistancia(ataqueDeRayo)})
+		
+		keyboard.e().onPressDo({player.experienciaDoble()})
 		keyboard.c().onPressDo({player.concentrar()})
 	}
 	

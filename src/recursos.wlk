@@ -89,10 +89,10 @@ object temploDeMana inherits Templo(position = game.at(2,2), image="vida.png") {
 	}
 }
 
-object temploDeExperiencia inherits Templo(position = game.at(2,3), image="vida.png") {
-	
+
+object temploDeExperiencia inherits Templo(position = game.at(5,8),image = "temploExperiencia.png"){
 	override method activar(){
-		// falta
+		player.experienciaDoble()
 	}
 }
 
