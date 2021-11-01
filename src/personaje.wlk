@@ -79,7 +79,7 @@ class Personaje {
 	
 	
 	method faltanEnemigos(){
-		return game.hasVisual(brujo)
+		return game.hasVisual(esqueleto)
 	}
 	
 	method perderVida(x){

@@ -75,7 +75,28 @@ class Templo{
 	var property position 
 	var property image
 	
+	method activar(){ }
 }
 
 //DEFINICION DE TEMPLO
-const temploDeMana = new Templo (position = game.at(2,2), image= "vida.png")
+//const temploDeMana = new Templo (position = game.at(2,2), image= "vida.png")
+//const temploDeExperiencia = new Templo (position = game.at(2,3), image="vida.png")
+
+object temploDeMana inherits Templo(position = game.at(2,2), image="vida.png") {
+	
+	override method activar(){
+		player.concentrar()
+	}
+}
+
+object temploDeExperiencia inherits Templo(position = game.at(2,3), image="vida.png") {
+	
+	override method activar(){
+		// falta
+	}
+}
+
+
+
+
+

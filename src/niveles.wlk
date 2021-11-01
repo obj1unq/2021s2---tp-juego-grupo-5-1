@@ -41,13 +41,13 @@ object visual{
 	}
 	
 	method enemigos(){
-		game.addVisual(escorpion)
-		game.addVisual(hiena)
+		game.addVisual(hongo)
+		game.addVisual(ojo)
 		game.addVisual(goblin)
-		game.addVisual(brujo)
-		game.showAttributes(escorpion)
-		game.showAttributes(hiena)
-		game.showAttributes(brujo)
+		game.addVisual(esqueleto)
+		game.showAttributes(hongo)
+		game.showAttributes(ojo)
+		game.showAttributes(esqueleto)
 		game.showAttributes(goblin)
 	}
 }
