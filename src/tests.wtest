@@ -25,3 +25,14 @@ test "lanzar fuego y subir nivel" {
 	assert.equals(6,player.poder())
 	assert.that(not game.allVisuals().contains(enemigoPrueba))
 }
+
+test "subir nivel conservando el resto de exp obtenida"{
+	player.position(game.origin())
+	game.addVisual(player)
+	player.subirDeNivel(12)
+	assert.equals(2,player.exp())
+	assert.equals(2,player.nivel())
+	player.subirDeNivel(24)
+	assert.equals(6,player.exp())
+	assert.equals(3,player.nivel())
+}
