@@ -10,16 +10,18 @@ object tutorial {
 		visual.personaje()
 		//visual.armas()
 		
-		visual.enemigos()
+		//visual.enemigos()
 		//config.sonido()
 		config.configurarTeclas()
 //		config.configurarStamina()
+        config.configurarSpawnEnemigos()
+        game.addVisual(esqueleto)
 		
 		game.addVisual(mostrarOro)
 		game.addVisual(temploDeMana)
 		
 		game.cellSize(45)
-		game.schedule(2000,{dialogo.inicial()})
+		//game.schedule(2000,{dialogo.inicial()})
 	}
 	
 }
@@ -40,16 +42,16 @@ object visual{
 		game.showAttributes(player)
 	}
 	
-	method enemigos(){
-		game.addVisual(hongo)
-		game.addVisual(ojo)
-		game.addVisual(goblin)
-		game.addVisual(esqueleto)
-		game.showAttributes(hongo)
-		game.showAttributes(ojo)
-		game.showAttributes(esqueleto)
-		game.showAttributes(goblin)
-	}
+//	method enemigos(){
+//		game.addVisual(hongo)
+//		game.addVisual(ojo)
+//		game.addVisual(goblin)
+//		game.addVisual(esqueleto)
+//		game.showAttributes(hongo)
+//		game.showAttributes(ojo)
+//		game.showAttributes(esqueleto)
+//		game.showAttributes(goblin)
+//	}
 }
 
 object config{
@@ -63,6 +65,9 @@ object config{
 		// keyboard.i().onPressDo({personaje.abrirInventario()})
 	}
 	
+	method configurarSpawnEnemigos(){
+		game.onTick(4000,"ENEMIGOS",{generadorEnemigos.spawnearEnemigo()})
+	}
 	method sonido(){
 		const sonido = game.sound("donkey-kong-country.mp3")
 		sonido.shouldLoop(true)
