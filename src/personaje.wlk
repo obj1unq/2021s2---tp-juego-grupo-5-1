@@ -128,7 +128,7 @@ class Personaje {
 		const niveles = [2,3,4]
 		niveles.forEach({x => 
 			if(self.esNivel(x)){
-				const element = listaHechizosBonus.anyOne()
+				const element = listaHechizosBonus.first()
 				hechizosAprendidos.add(element)
 				listaHechizosBonus.remove(element)
 			}

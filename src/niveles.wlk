@@ -79,9 +79,9 @@ object config{
 		
 		keyboard.a().onPressDo({player.ataqueMelee()})
 		
-		keyboard.num3().onPressDo({player.lanzar(new Hielo())})
-		keyboard.num1().onPressDo({player.lanzar(new Fuego())})
-		keyboard.num2().onPressDo({player.lanzar(new Rayo())})
+		keyboard.num1().onPressDo({player.lanzar(fuego)})
+		keyboard.num2().onPressDo({player.lanzar(rayo)})
+		keyboard.num3().onPressDo({player.lanzar(hielo)})
 //		keyboard.num4().onPressDo({player.lanzar(escudo)})
 		
 		keyboard.e().onPressDo({player.experienciaDoble()})
