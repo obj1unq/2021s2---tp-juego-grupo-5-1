@@ -57,7 +57,7 @@ object visual{
 
 object config{
 	method configurarTeclas(){
-		self.hechizos()
+		self.ataques()
 		self.movimientos()
 		
 		keyboard.s().onPressDo({player.guardar()})
@@ -75,14 +75,14 @@ object config{
 		game.schedule(500, { sonido.play()} )
 	}
 	
-	method hechizos(){
-		keyboard.num1().onPressDo({player.lanzar(fuego)})
-		keyboard.num2().onPressDo({player.lanzar(rayo)})
-		keyboard.num3().onPressDo({player.lanzar(hielo)})
-		keyboard.num4().onPressDo({player.lanzar(escudo)})
-		keyboard.g().onPressDo({player.ataqueAdistancia(ataqueDeHielo)})
-		keyboard.h().onPressDo({player.ataqueAdistancia(ataqueDeFuego)})
-		keyboard.j().onPressDo({player.ataqueAdistancia(ataqueDeRayo)})
+	method ataques(){
+		
+		keyboard.a().onPressDo({player.ataqueMelee()})
+		
+		keyboard.num3().onPressDo({player.lanzar(new Hielo())})
+		keyboard.num1().onPressDo({player.lanzar(new Fuego())})
+		keyboard.num2().onPressDo({player.lanzar(new Rayo())})
+//		keyboard.num4().onPressDo({player.lanzar(escudo)})
 		
 		keyboard.e().onPressDo({player.experienciaDoble()})
 		keyboard.c().onPressDo({player.concentrar()})
@@ -93,7 +93,6 @@ object config{
 		keyboard.right().onPressDo({ player.mover(derecha)})
 		keyboard.up().onPressDo(   { player.mover(arriba)})
 		keyboard.down().onPressDo( { player.mover(abajo)})
-//		keyboard.a().onPressDo({player.atacarEnemigoAdelante()})
 	}
 	
 	method potas(){

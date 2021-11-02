@@ -9,7 +9,7 @@ class Personaje {
 	var property position = game.origin()
 	var direccion = derecha
 	var property nivel = 1
-	var property hechizosAprendidos = #{fuego,ataqueDeFuego}//----
+	var property hechizosAprendidos = #{}//----
 	var property vida
 	var property poder
 	var property exp = 0
@@ -45,22 +45,19 @@ class Personaje {
 	method remove(elemento){mochila.eliminar(elemento)}
 	
 	
-	method lanzar(hechizo){
-		self.validarSiSePuedeLanzar(hechizo)
+	method ataqueMelee(){
 		const enemigos = game.colliders(self)
 		enemigos.forEach({ enemigo => 
-			enemigo.pierdeVida(hechizo.damage())
-			self.gastarMana(hechizo)
+			enemigo.pierdeVida(self.poder())
 			self.subirDeNivel(enemigo.expQueOtorga())
 			self.perderVida(enemigo.golpe())
 		})
 	}
 	//ATAQUES A DISTANCIA--------------------------------------------
-	method ataqueAdistancia(tipo){
+	method lanzar(tipo){
 		self.validarSiSePuedeLanzar(tipo)
 		self.gastarMana(tipo)
 		tipo.lanzar(direccion,position)
-		
 	}
 	
 	method gastarMana(hechizo){
@@ -128,7 +125,7 @@ class Personaje {
 	
 	//--------------------se modifico -----------------------------------
 	method aprenderNuevoHechizo(){
-		const niveles = [2,5,10]
+		const niveles = [2,3,4]
 		niveles.forEach({x => 
 			if(self.esNivel(x)){
 				const element = listaHechizosBonus.anyOne()
