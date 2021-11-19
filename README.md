@@ -5,7 +5,6 @@
 
 - Facundo Cordoba
 - Ledesma Belen
-- Mayra Domene
 - Jaureguiberry Nicolás
 
 
