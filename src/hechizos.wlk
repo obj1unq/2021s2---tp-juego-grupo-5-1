@@ -31,7 +31,7 @@ class Hechizo{
 		const elementos = game.colliders(self)
 		elementos.forEach({x => 
 			if(generadorEnemigos.setDeEnemigos().contains(x)){
-				player.subirDeNivel(x.expQueOtorga())
+				personaje.subirDeNivel(x.expQueOtorga())
 				x.pierdeVida(damage)
 				self.desaparecer()
 		}})

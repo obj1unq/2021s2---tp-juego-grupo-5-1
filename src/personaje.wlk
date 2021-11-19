@@ -4,7 +4,7 @@ import enemigos.*
 import recursos.*
 import hechizos.*
 
-class Personaje {
+object personaje {
     var property mana
 	var property position = game.origin()
 	var direccion = derecha
@@ -50,7 +50,6 @@ class Personaje {
 		enemigos.forEach({ enemigo => 
 			enemigo.pierdeVida(self.poder())
 			self.subirDeNivel(enemigo.expQueOtorga())
-			self.perderVida(enemigo.golpe())
 		})
 	}
 	//ATAQUES A DISTANCIA--------------------------------------------
@@ -82,9 +81,9 @@ class Personaje {
 	}
 	
 	
-	method faltanEnemigos(){
-		return game.hasVisual(esqueleto)
-	}
+//	method faltanEnemigos(){
+//		return //game.hasVisual(esqueleto)
+//	}
 	
 	method perderVida(x){
 		vida = (vida - x).max(0)
@@ -162,12 +161,12 @@ class Personaje {
 	
 	//---------------------------------------------------------
 
-	method ganar(){
-		if(!self.faltanEnemigos()){
-			game.say(self,"GANASTE")
-			game.schedule(2000,{game.stop()})
-		}
-	}
+//	method ganar(){
+//		if(!self.faltanEnemigos()){
+//			game.say(self,"GANASTE")
+//			game.schedule(2000,{game.stop()})
+//		}
+//	}
 	
 	method perder(){
 		if(vida == 0){
@@ -215,6 +214,3 @@ object inventario{
 		return x
 	}
 }
-
-//DEFINICION DE PLAYER 1 
-const player = new Personaje(mana = 100,poder = 5,vida = 10)

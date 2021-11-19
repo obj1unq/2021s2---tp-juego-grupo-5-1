@@ -7,7 +7,7 @@ import hechizos.*
 
 object tutorial {
 	method iniciar(){
-		visual.personaje()
+		visual.pj()
 		//visual.armas()
 		
 		//visual.enemigos()
@@ -15,7 +15,8 @@ object tutorial {
 		config.configurarTeclas()
 //		config.configurarStamina()
         config.configurarSpawnEnemigos()
-        game.addVisual(esqueleto)
+//        game.addVisual(esqueleto)
+		config.movimientoEnemigos()
 		
 		game.addVisual(mostrarOro)
 		game.addVisual(temploDeMana)
@@ -33,14 +34,14 @@ object dialogo {
 	method inicial(){
 		tutorial.forEach({
 			texto =>
-			game.say(player,texto)
+			game.say(personaje,texto)
 		})
 	}
 }
 object visual{
-	method personaje(){
-		game.addVisual(player)
-		game.showAttributes(player)
+	method pj(){
+		game.addVisual(personaje)
+		game.showAttributes(personaje)
 	}
 	
 //	method enemigos(){
@@ -60,7 +61,7 @@ object config{
 		self.ataques()
 		self.movimientos()
 		
-		keyboard.s().onPressDo({player.guardar()})
+		keyboard.s().onPressDo({personaje.guardar()})
 		
 		// keyboard.q().onPressDo({player.curarse()})
 		// keyboard.i().onPressDo({personaje.abrirInventario()})
@@ -77,23 +78,27 @@ object config{
 	
 	method ataques(){
 		
-		keyboard.a().onPressDo({player.ataqueMelee()})
+		keyboard.a().onPressDo({personaje.ataqueMelee()})
 		
-		keyboard.num1().onPressDo({player.lanzar(fuego)})
-		keyboard.num2().onPressDo({player.lanzar(rayo)})
-		keyboard.num3().onPressDo({player.lanzar(hielo)})
+		keyboard.num1().onPressDo({personaje.lanzar(fuego)})
+		keyboard.num2().onPressDo({personaje.lanzar(rayo)})
+		keyboard.num3().onPressDo({personaje.lanzar(hielo)})
 //		keyboard.num4().onPressDo({player.lanzar(escudo)})
 		
-		keyboard.e().onPressDo({player.experienciaDoble()})
-		keyboard.c().onPressDo({player.concentrar()})
+		keyboard.e().onPressDo({personaje.experienciaDoble()})
+		keyboard.c().onPressDo({personaje.concentrar()})
 	}
 	
 	method movimientos(){
-		keyboard.left().onPressDo( { player.mover(izquierda)})
-		keyboard.right().onPressDo({ player.mover(derecha)})
-		keyboard.up().onPressDo(   { player.mover(arriba)})
-		keyboard.down().onPressDo( { player.mover(abajo)})
+		keyboard.left().onPressDo( { personaje.mover(izquierda)})
+		keyboard.right().onPressDo({ personaje.mover(derecha)})
+		keyboard.up().onPressDo(   { personaje.mover(arriba)})
+		keyboard.down().onPressDo( { personaje.mover(abajo)})
 	}
+	
+	method movimientoEnemigos(){
+		game.onTick(1000,"MOVENEMIGOS",{generadorEnemigos.enemigos().forEach({enemigo => enemigo.buscar(personaje)})})
+	}	
 	
 	method potas(){
 //		keyboard.q().onPressDo({player.usarPocion(vida)})

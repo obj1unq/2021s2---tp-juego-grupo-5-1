@@ -85,14 +85,14 @@ class Templo{
 object temploDeMana inherits Templo(position = game.at(2,2), image="vida.png") {
 	
 	override method activar(){
-		player.concentrar()
+		personaje.concentrar()
 	}
 }
 
 
 object temploDeExperiencia inherits Templo(position = game.at(5,8),image = "temploExperiencia.png"){
 	override method activar(){
-		player.experienciaDoble()
+		personaje.experienciaDoble()
 	}
 }
 

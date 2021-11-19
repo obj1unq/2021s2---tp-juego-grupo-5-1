@@ -31,36 +31,68 @@ class Enemigo {
 		inventario.sumarOro(oroQueDa)
 	}
 	
-
 	method noTieneMasVida(){
 		return hp == 0
-	}
-	//DUPLICAR EXPERIENCIA POR 10 SEG
-	method duplicarExp(){
-		const reset = expQueOtorga
-		expQueOtorga *= 2
-		game.schedule(10000,{expQueOtorga = reset})
 	}
 
 	method validarGuardado(){self.error("No se puede guardar a un enemigo")}
 	
+	method buscar(pj)
+	
+	method atacar(pj)	
 }
 
-class Ojo inherits Enemigo(image = "enemigos/ojo.png"){
+class EnemigoMele inherits Enemigo{
+	override method buscar(pj){
+		var positionDifX = (self.position().x() - pj.position().x()).abs()
+		var positionDifY = (self.position().y() - pj.position().y()).abs()
+		if(positionDifX != 0 and self.position().x() > pj.position().x()){
+			self.position(self.position().left(1)) 
+		}else if(positionDifX != 0 and self.position().x() < pj.position().x()){
+			self.position(self.position().right(1))
+		}else if(positionDifY != 0 and self.position().y() > pj.position().y()){
+			self.position(self.position().down(1))
+		}else if(positionDifY != 0 and self.position().y() < pj.position().y()){
+			self.position(self.position().up(1)) 
+		}else{
+			self.atacar(pj)
+		}
+	}
+	
+	override method atacar(pj){
+		return pj.perderVida(self.golpe())
+	}
 	
 }
-class Goblin inherits Enemigo(image = "enemigos/goblin.png"){}
-class Hongo inherits Enemigo(image = "enemigos/hongo.png"){}
 
-class EnemigoFinal inherits Enemigo{
-	
-	override method muere(){
-		super()
-		player.ganar()
+class EnemigoRango inherits Enemigo{
+	override method buscar(pj){
+		
+	}
+	override method atacar(pj){
+		return pj.perderVida(self.golpe())
 	}
 }
-//DEFINICION DE ENEMIGOS
-const esqueleto = new EnemigoFinal(image="enemigos/esqueleto.png",position=game.at(15,5),hp = 20,expQueOtorga=5,golpe=2)
+
+class Ojo inherits EnemigoRango(image = "enemigos/ojo.png"){
+	
+}
+class Goblin inherits EnemigoMele(image = "enemigos/goblin.png"){
+	
+}
+class Hongo inherits EnemigoMele(image = "enemigos/hongo.png"){
+	
+}
+
+//class EnemigoFinal inherits Enemigo{
+//	
+//	override method muere(){
+//		super()
+//		personaje.ganar()
+//	}
+//}
+//
+//const esqueleto = new EnemigoFinal(image="enemigos/esqueleto.png",position=game.at(15,5),hp = 20,expQueOtorga=5,golpe=2)
 
 
 object generadorEnemigos{
@@ -92,7 +124,7 @@ object generadorEnemigos{
 	}
 	
 	method setDeEnemigos(){
-		return #{esqueleto} + self.enemigos()
+		return /* #{esqueleto}*/ + self.enemigos()
 		 
 	}
 }
