@@ -1,38 +1,38 @@
-import wollok.game.*
-import personaje.*
-import enemigos.*
-import personaje.*
-import hechizos.*
-
-test "lanzar fuego y subir nivel" {
-	player.position(game.origin())
-	const enemigoPrueba = new Hongo(position = game.origin())
-	game.addVisual(player)
-	game.addVisual(enemigoPrueba)
-	player.lanzar(fuego)
-	assert.equals(9,player.vida())
-	assert.equals(80,player.mana())
-	assert.equals(2,player.exp())
-	assert.equals(8,enemigoPrueba.hp())
-	player.lanzar(fuego)
-	player.lanzar(fuego)
-	player.lanzar(fuego)
-	player.lanzar(fuego)
-	assert.equals(7,player.vida())
-	assert.equals(0,player.mana())
-	assert.equals(0,player.exp())
-	assert.equals(2,player.nivel())
-	assert.equals(6,player.poder())
-	assert.that(not game.allVisuals().contains(enemigoPrueba))
-}
-
-test "subir nivel conservando el resto de exp obtenida"{
-	player.position(game.origin())
-	game.addVisual(player)
-	player.subirDeNivel(12)
-	assert.equals(2,player.exp())
-	assert.equals(2,player.nivel())
-	player.subirDeNivel(24)
-	assert.equals(6,player.exp())
-	assert.equals(3,player.nivel())
-}
+//import wollok.game.*
+//import personaje.*
+//import enemigos.*
+//import personaje.*
+//import hechizos.*
+//
+//test "lanzar fuego y subir nivel" {
+//	player.position(game.origin())
+//	const enemigoPrueba = new Hongo(position = game.origin())
+//	game.addVisual(player)
+//	game.addVisual(enemigoPrueba)
+//	player.lanzar(fuego)
+//	assert.equals(9,player.vida())
+//	assert.equals(80,player.mana())
+//	assert.equals(2,player.exp())
+//	assert.equals(8,enemigoPrueba.hp())
+//	player.lanzar(fuego)
+//	player.lanzar(fuego)
+//	player.lanzar(fuego)
+//	player.lanzar(fuego)
+//	assert.equals(7,player.vida())
+//	assert.equals(0,player.mana())
+//	assert.equals(0,player.exp())
+//	assert.equals(2,player.nivel())
+//	assert.equals(6,player.poder())
+//	assert.that(not game.allVisuals().contains(enemigoPrueba))
+//}
+//
+//test "subir nivel conservando el resto de exp obtenida"{
+//	player.position(game.origin())
+//	game.addVisual(player)
+//	player.subirDeNivel(12)
+//	assert.equals(2,player.exp())
+//	assert.equals(2,player.nivel())
+//	player.subirDeNivel(24)
+//	assert.equals(6,player.exp())
+//	assert.equals(3,player.nivel())
+//}

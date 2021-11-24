@@ -3,6 +3,8 @@ import wollok.game.*
 import personaje.*
 import recursos.*
 import randomizer.*
+import direcciones.*
+import objects.*
 
 class Enemigo {
 	var property position
@@ -37,24 +39,21 @@ class Enemigo {
 
 	method validarGuardado(){self.error("No se puede guardar a un enemigo")}
 	
-	method buscar(pj)
+	method perseguir(pj)
 	
 	method atacar(pj)	
 }
 
 class EnemigoMele inherits Enemigo{
-	override method buscar(pj){
-		var positionDifX = (self.position().x() - pj.position().x()).abs()
-		var positionDifY = (self.position().y() - pj.position().y()).abs()
-		if(positionDifX != 0 and self.position().x() > pj.position().x()){
-			self.position(self.position().left(1)) 
-		}else if(positionDifX != 0 and self.position().x() < pj.position().x()){
-			self.position(self.position().right(1))
-		}else if(positionDifY != 0 and self.position().y() > pj.position().y()){
-			self.position(self.position().down(1))
-		}else if(positionDifY != 0 and self.position().y() < pj.position().y()){
-			self.position(self.position().up(1)) 
-		}else{
+	
+	override method perseguir(pj){
+		const positionDifX = (self.position().x() - pj.position().x()).abs()
+		const positionDifY = (self.position().y() - pj.position().y()).abs()
+		if(positionDifX != 0){
+			moverse.sobreX(self,pj)	
+		}else if(positionDifY != 0){
+			moverse.sobreY(self,pj)
+		}else {
 			self.atacar(pj)
 		}
 	}
@@ -65,12 +64,55 @@ class EnemigoMele inherits Enemigo{
 	
 }
 
+
 class EnemigoRango inherits Enemigo{
-	override method buscar(pj){
+	override method perseguir(pj){
+
+		const positionDifY = (self.position().y() - pj.position().y()).abs()
+		if(positionDifY != 0){
+			moverse.sobreY(self,pj)	
+		}else {
+			self.atacar(pj)
+		}
+	}
+	
+	override method atacar(pj){
+		const ataque = new Ataque(position = self.position(),golpe = self.golpe())
+		ataque.lanzar(pj)
 		
 	}
-	override method atacar(pj){
-		return pj.perderVida(self.golpe())
+}
+
+class Ataque{
+	var property position
+	const golpe
+	method text() = "ataque"
+	method lanzar(pj){
+		game.addVisual(self)
+		var i = 10
+		game.onTick(100,"enemigoAtaca",{
+			if(i > 0){
+				moverse.sobreX(self,pj)
+				i -= 1
+				self.verificarAtaque(pj)
+			}else{
+				self.desaparecer()
+			}
+		})
+	}
+	method verificarAtaque(pj){
+		const elementos = game.colliders(self)
+		if(elementos.contains(pj)){
+			pj.perderVida(golpe)
+			self.desaparecer()
+		}
+	}
+	
+	method desaparecer(){
+		if(game.hasVisual(self)){
+			game.removeVisual(self)
+			game.removeTickEvent("enemigoAtaca")
+		}
 	}
 }
 
@@ -81,7 +123,17 @@ class Goblin inherits EnemigoMele(image = "enemigos/goblin.png"){
 	
 }
 class Hongo inherits EnemigoMele(image = "enemigos/hongo.png"){
-	
+	override method perseguir(pj){
+		const positionDifX = (self.position().x() - pj.position().x()).abs()
+		const positionDifY = (self.position().y() - pj.position().y()).abs()
+		if(positionDifY != 0){
+			moverse.sobreY(self,pj)	
+		}else if(positionDifX != 0){
+			moverse.sobreX(self,pj)
+		}else {
+			self.atacar(pj)
+		}
+	}
 }
 
 //class EnemigoFinal inherits Enemigo{
@@ -98,6 +150,7 @@ class Hongo inherits EnemigoMele(image = "enemigos/hongo.png"){
 object generadorEnemigos{
 	const property enemigos = #{}
 	const max = 5
+	var cantMax = 0
 	const factoriesEnemigos = [hongoFactory,ojoFactory,goblinFactory]	
 	
 	method spawnearEnemigo(){
@@ -106,12 +159,20 @@ object generadorEnemigos{
 			game.addVisual(enemigo)
 			game.showAttributes(enemigo)
 			enemigos.add(enemigo)
+			cantMax += 1
+		}else if(cantMax == 10){
+			self.validarFin()
 		}
 	}
 	
+	method validarFin(){
+		if(enemigos.size() == 0){
+			personaje.ganarNivel()
+		}
+	}
 	
 	method hayQueSpawnear(){
-		return enemigos.size()<max
+		return enemigos.size()<max && cantMax < 10
 	}
 	
 	method spawnEnemigos(){

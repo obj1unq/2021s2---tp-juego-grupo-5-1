@@ -1,4 +1,4 @@
-
+import objects.*
 import wollok.game.*
 import personaje.*
 import enemigos.*
@@ -8,7 +8,7 @@ program juego {
 	game.title("Juego Base")
 	game.height(13)
 	game.width(21)
-	game.boardGround("fondo-demo.jpg")
-	tutorial.iniciar()
+	game.cellSize(83)
+	inicio.show()
 	game.start()
 }

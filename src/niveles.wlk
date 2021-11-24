@@ -22,7 +22,7 @@ object tutorial {
 		game.addVisual(temploDeMana)
 		game.addVisual(temploDeExperiencia)
 		
-		game.cellSize(45)
+		//game.cellSize(45)
 		//game.schedule(2000,{dialogo.inicial()})
 	}
 	
@@ -59,17 +59,14 @@ object visual{
 object config{
 	method configurarTeclas(){
 		self.ataques()
-		self.movimientos()
-		
+		self.movimientos()		
 		keyboard.s().onPressDo({personaje.guardar()})
-		
-		// keyboard.q().onPressDo({player.curarse()})
-		// keyboard.i().onPressDo({personaje.abrirInventario()})
 	}
 	
 	method configurarSpawnEnemigos(){
 		game.onTick(4000,"ENEMIGOS",{generadorEnemigos.spawnearEnemigo()})
 	}
+	
 	method sonido(){
 		const sonido = game.sound("donkey-kong-country.mp3")
 		sonido.shouldLoop(true)
@@ -77,14 +74,10 @@ object config{
 	}
 	
 	method ataques(){
-		
 		keyboard.a().onPressDo({personaje.ataqueMelee()})
-		
 		keyboard.num1().onPressDo({personaje.lanzar(fuego)})
 		keyboard.num2().onPressDo({personaje.lanzar(rayo)})
 		keyboard.num3().onPressDo({personaje.lanzar(hielo)})
-//		keyboard.num4().onPressDo({player.lanzar(escudo)})
-		
 		keyboard.e().onPressDo({personaje.experienciaDoble()})
 		keyboard.c().onPressDo({personaje.concentrar()})
 	}
@@ -97,19 +90,10 @@ object config{
 	}
 	
 	method movimientoEnemigos(){
-		game.onTick(1000,"MOVENEMIGOS",{generadorEnemigos.enemigos().forEach({enemigo => enemigo.buscar(personaje)})})
+		game.onTick(1000,"MOVENEMIGOS",{generadorEnemigos.enemigos().forEach({enemigo => enemigo.perseguir(personaje)})})
 	}	
 	
-	method potas(){
-//		keyboard.q().onPressDo({player.usarPocion(vida)})
-//		keyboard.w().onPressDo({player.usarPocion(mana)})
-		//keyboard.e().onPressDo({personaje.curarse(stamina)})
-		//keyboard.r().onPressDo({personaje.curarse(veneno)})
-	}
-	
-//	
-//	method configurarStamina(){
-//	   game.onTick(900, "STAMINA", { player.recuperarStamina(1)})
-//    }
 	
 }
+
+

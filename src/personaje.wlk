@@ -3,6 +3,7 @@ import direcciones.*
 import enemigos.*
 import recursos.*
 import hechizos.*
+import objects.*
 
 object personaje {
     var property mana
@@ -10,8 +11,8 @@ object personaje {
 	var direccion = derecha
 	var property nivel = 1
 	var property hechizosAprendidos = #{}//----
-	var property vida
-	var property poder
+	var property vida = 10
+	var property poder = 10
 	var property exp = 0
 	const property mochila = inventario
 	
@@ -48,8 +49,11 @@ object personaje {
 	method ataqueMelee(){
 		const enemigos = game.colliders(self)
 		enemigos.forEach({ enemigo => 
-			enemigo.pierdeVida(self.poder())
+			if(generadorEnemigos.enemigos().contains(enemigo)){
+				enemigo.pierdeVida(self.poder())
 			self.subirDeNivel(enemigo.expQueOtorga())
+			}
+			
 		})
 	}
 	//ATAQUES A DISTANCIA--------------------------------------------
@@ -161,12 +165,14 @@ object personaje {
 	
 	//---------------------------------------------------------
 
-//	method ganar(){
-//		if(!self.faltanEnemigos()){
-//			game.say(self,"GANASTE")
-//			game.schedule(2000,{game.stop()})
-//		}
-//	}
+	method ganar(){
+			game.say(self,"GANASTE")
+			game.schedule(2000,{game.stop()})
+	}
+	method ganarNivel(){
+		game.say(self,"Continuemos con el sig nivel!")
+		game.schedule(2000,{nivel2.show()})
+	}
 	
 	method perder(){
 		if(vida == 0){
