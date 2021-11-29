@@ -9,7 +9,7 @@ program juego {
 	game.title("Juego Base")
 	game.height(14)
 	game.width(21)
-
+	game.cellSize(45)
 	game.boardGround("negro.jpg")
 	bonus.show()
 	game.start()
