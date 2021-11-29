@@ -3,48 +3,73 @@ import direcciones.*
 import enemigos.*
 import recursos.*
 import hechizos.*
-import objects.*
+import visuales.*
+import hud.*
+import config.*
+import niveles.*
 
 object personaje {
-    var property mana
-	var property position = game.origin()
+    var property mana = 100
+	var property position = game.at(0,2)
 	var direccion = derecha
 	var property nivel = 1
-	var property hechizosAprendidos = #{}//----
+	var property hechizosAprendidos = #{}
 	var property vida = 10
 	var property poder = 10
 	var property exp = 0
+	var pantalla = 1
 	const property mochila = inventario
 	
 	method image() = "pj-"+ self.sufijo() +".png"
 	
+	method reiniciar(){
+		mana = 100
+		position = game.at(0,2)
+		direccion = derecha
+		vida = 10
+		poder = 10
+		exp = 0
+	}
 	method mover(_direccion){
 		direccion = _direccion
 		self.irA(_direccion.siguiente(self.position()))
 	}
 	
-	method irA(nuevaPosicion){
-		position = nuevaPosicion
-	}
+	method irA(nuevaPosicion){position = nuevaPosicion}
 	
-	method sufijo(){
-		return direccion.sufijo()
+	method sufijo(){return direccion.sufijo()}
+	//****
+	method recuperarMana(cantidad){
+		if (self.noTieneFullMana()){ 
+			mana = (mana + cantidad).min(100)
+			hud.agregarMana(cantidad)
+		}
 	}
-	
-	method recuperarMana(cantidad){ if (self.noTieneFullMana()){ mana += cantidad } }
 	
 	method noTieneFullMana(){ return mana < 100 }
 	
 	method agotoMana(){ return mana == 0 }
-
+	
+//*****MOCHILA REVISAR SI SE USAAA!
 	method contiene(elemento){
 		if(not mochila.tiene(elemento)){
 			self.error("no hay "+ elemento.toString() + " en el inventario")
 		}
 	}
+		method guardar(){
+		const recursos = game.colliders(self)
+		recursos.forEach({recurso => 
+			recurso.validarGuardado()
+			self.guardarEnInventario(recurso)
+		})
+	}
+	
+	method guardarEnInventario(recurso){
+		mochila.agregar(recurso)
+	}
 	
 	method remove(elemento){mochila.eliminar(elemento)}
-	
+//********************
 	
 	method ataqueMelee(){
 		const enemigos = game.colliders(self)
@@ -56,7 +81,7 @@ object personaje {
 			
 		})
 	}
-	//ATAQUES A DISTANCIA--------------------------------------------
+
 	method lanzar(tipo){
 		self.validarSiSePuedeLanzar(tipo)
 		self.gastarMana(tipo)
@@ -65,6 +90,7 @@ object personaje {
 	
 	method gastarMana(hechizo){
 		mana -= hechizo.manaRequerida().max(0)
+		hud.quitarMana(hechizo.manaRequerida() /10)
 	}
 	
 	method validarSiSePuedeLanzar(hechizo){
@@ -84,49 +110,29 @@ object personaje {
 		}
 	}
 	
-	
-//	method faltanEnemigos(){
-//		return //game.hasVisual(esqueleto)
-//	}
-	
 	method perderVida(x){
 		vida = (vida - x).max(0)
+		hud.quitarVidas(x)
 		self.perder()
 	}
-	
-//	method curarse(){
-//		self.contiene(curacion)
-//		curacion.usar(self)
-//		self.remove(curacion)
-//	}
-//	
-	method sumarVida(x){vida = (vida + x).min(10)}
-	
-	
-	method guardar(){
-		const recursos = game.colliders(self)
-		recursos.forEach({recurso => 
-			recurso.validarGuardado()
-			self.guardarEnInventario(recurso)
-		})
+
+	method sumarVida(x){
+		vida = (vida + x).min(10)
+		hud.agregarVidas(x)
 	}
 	
-	method guardarEnInventario(recurso){
-		mochila.agregar(recurso)
-	}
 
 	method subirDeNivel(_exp){
 		exp += _exp
 		if(exp >= 10 * nivel){
 			exp -= 10 * nivel
 			nivel += 1
-			vida += 2
 			poder += 1
+			self.sumarVida(2)
 			self.aprenderNuevoHechizo()
 		}
 	}
-	
-	//--------------------se modifico -----------------------------------
+
 	method aprenderNuevoHechizo(){
 		const niveles = [2,3,4]
 		niveles.forEach({x => 
@@ -138,40 +144,47 @@ object personaje {
 		})
 	} 
 	
-	method esNivel(numero){
-		return nivel == numero
-	}
+	method esNivel(numero){return nivel == numero}
 	
 	method concentrar(){
 		self.validarQueEstaEnTemplo(temploDeMana)
-		mana += 20
+		if(mana < 100){
+			mana = (mana + 20).min(100)
+			hud.agregarMana(2)
+		}
 	}
 	
 	method validarQueEstaEnTemplo(tipo){
 		if(! self.estaEnTemplo(tipo)){
-			self.error("No puedo concentrar si no estoy en el templo!")
+			self.error("No estoy en el templo!")
 		}
 	}
 	
 	method estaEnTemplo(tipo){  
 	 return game.colliders(self).contains(tipo)
 	}
-	
-	//Usar templo de experiencia -------------------------
+
 	method experienciaDoble(){
 		self.validarQueEstaEnTemplo(temploDeExperiencia)
 		 generadorEnemigos.enemigos().forEach({enemigo => enemigo.duplicarExp()})
 	}
 	
-	//---------------------------------------------------------
-
 	method ganar(){
 			game.say(self,"GANASTE")
 			game.schedule(2000,{game.stop()})
 	}
+	
 	method ganarNivel(){
 		game.say(self,"Continuemos con el sig nivel!")
-		game.schedule(2000,{nivel2.show()})
+		if(pantalla == 1){
+			game.schedule(2000,{nivel2.show()})
+			pantalla += 1
+		}
+		else if(pantalla == 2){
+			game.schedule(2000,{bonus.show()})
+			pantalla += 1
+		}
+		
 	}
 	
 	method perder(){
@@ -187,11 +200,10 @@ object inventario{
 	const property mochilaPersonaje = []
 	var property cantidadDeOro = 0
 	
-	// --------------------------------------------
 	method sumarOro(cantidad){   
 		cantidadDeOro += cantidad 
 	}
-	//--------------------------------------------------
+
 	method agregar(elemento){
 		mochilaPersonaje.add(elemento)
 		elemento.agregadoEn(self)

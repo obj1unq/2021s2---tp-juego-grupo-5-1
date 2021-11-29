@@ -1,10 +1,10 @@
-
 import wollok.game.*
 import personaje.*
 import recursos.*
 import randomizer.*
 import direcciones.*
-import objects.*
+import visuales.*
+import ataques.*
 
 class Enemigo {
 	var property position
@@ -12,20 +12,22 @@ class Enemigo {
 	var property expQueOtorga = 2
 	var property golpe = 1
 	var property image
+	var property direccion = derecha
 	const oroQueDa = (1 .. 10).anyOne()
-		
+	
+	method image()
+	
 	method pierdeVida(poder){
 		hp = (hp - poder).max(0)
 		self.muere()
 	}
+	method sufijo(){return direccion.sufijo()}
 	
 	method muere(){
 		if(self.noTieneMasVida()){
 			game.removeVisual(self)
-			//self.soltarDrop()
 			generadorEnemigos.remover(self)
 			self.darRecompensaDeOro()
-			
 		}
 	}
 	
@@ -33,10 +35,13 @@ class Enemigo {
 		inventario.sumarOro(oroQueDa)
 	}
 	
-	method noTieneMasVida(){
-		return hp == 0
+	method noTieneMasVida(){return hp == 0}
+	
+	method duplicarExp(){
+		expQueOtorga *= 2
+		game.schedule(5000,{expQueOtorga /= 2})
 	}
-
+	
 	method validarGuardado(){self.error("No se puede guardar a un enemigo")}
 	
 	method perseguir(pj)
@@ -67,62 +72,30 @@ class EnemigoMele inherits Enemigo{
 
 class EnemigoRango inherits Enemigo{
 	override method perseguir(pj){
-
 		const positionDifY = (self.position().y() - pj.position().y()).abs()
 		if(positionDifY != 0){
-			moverse.sobreY(self,pj)	
+			moverse.sobreY(self,pj)
+			moverse.perfilarse(self,pj)	
 		}else {
 			self.atacar(pj)
 		}
 	}
 	
 	override method atacar(pj){
-		const ataque = new Ataque(position = self.position(),golpe = self.golpe())
-		ataque.lanzar(pj)
-		
-	}
-}
-
-class Ataque{
-	var property position
-	const golpe
-	method text() = "ataque"
-	method lanzar(pj){
-		game.addVisual(self)
-		var i = 10
-		game.onTick(100,"enemigoAtaca",{
-			if(i > 0){
-				moverse.sobreX(self,pj)
-				i -= 1
-				self.verificarAtaque(pj)
-			}else{
-				self.desaparecer()
-			}
-		})
-	}
-	method verificarAtaque(pj){
-		const elementos = game.colliders(self)
-		if(elementos.contains(pj)){
-			pj.perderVida(golpe)
-			self.desaparecer()
-		}
-	}
-	
-	method desaparecer(){
-		if(game.hasVisual(self)){
-			game.removeVisual(self)
-			game.removeTickEvent("enemigoAtaca")
-		}
+		const ataque = new Ataque(position = self.position(),golpe = self.golpe(),dir = direccion)
+		ataque.lanzar(pj)	
 	}
 }
 
 class Ojo inherits EnemigoRango(image = "enemigos/ojo.png"){
-	
+	 override method image() = "enemigos/ojo-" + self.sufijo() + ".png"
 }
 class Goblin inherits EnemigoMele(image = "enemigos/goblin.png"){
-	
+	override method image() = "enemigos/goblin-" + self.sufijo() + ".png"
 }
 class Hongo inherits EnemigoMele(image = "enemigos/hongo.png"){
+	override method image() = "enemigos/hongo-" + self.sufijo() + ".png"
+	 
 	override method perseguir(pj){
 		const positionDifX = (self.position().x() - pj.position().x()).abs()
 		const positionDifY = (self.position().y() - pj.position().y()).abs()
@@ -136,21 +109,38 @@ class Hongo inherits EnemigoMele(image = "enemigos/hongo.png"){
 	}
 }
 
-//class EnemigoFinal inherits Enemigo{
-//	
-//	override method muere(){
-//		super()
-//		personaje.ganar()
-//	}
-//}
-//
-//const esqueleto = new EnemigoFinal(image="enemigos/esqueleto.png",position=game.at(15,5),hp = 20,expQueOtorga=5,golpe=2)
+class EnemigoFinal inherits Enemigo{
+	
+	override method image() = "enemigos/esqueleto-" + self.sufijo() + ".png"
+	override method perseguir(pj){
+		game.onTick(2000,"enY",{
+			position = game.at(position.x(),2.randomUpTo(8).roundUp())
+		})
+		self.atacar(pj)
+	}
+	override method atacar(pj){
+		const ataques = new AtaqueFinal(golpe= golpe,dir = izquierda)
+		game.onTick(3000,"lanzamiento",{
+			ataques.lanzar(pj)
+			
+		})
+	}
+
+	override method muere(){
+		super()
+		if(self.noTieneMasVida()){
+			personaje.ganarNivel()		
+		}
+	
+	}
+}
 
 
-object generadorEnemigos{
-	const property enemigos = #{}
-	const max = 5
-	var cantMax = 0
+
+object generadorEnemigos {
+	var property enemigos = #{}
+	var property max  =10
+	var property cantMax = 0
 	const factoriesEnemigos = [hongoFactory,ojoFactory,goblinFactory]	
 	
 	method spawnearEnemigo(){
@@ -160,20 +150,32 @@ object generadorEnemigos{
 			game.showAttributes(enemigo)
 			enemigos.add(enemigo)
 			cantMax += 1
-		}else if(cantMax == 10){
-			self.validarFin()
+		}else if(cantMax == max){
+			game.removeTickEvent("ENEMIGOS")
+			self.validarFinal()
 		}
 	}
+	method noHayMas(){return enemigos.size() == 0}
 	
-	method validarFin(){
-		if(enemigos.size() == 0){
-			personaje.ganarNivel()
-		}
+	method validarFinal(){
+		if(enemigos.size() > 0){
+			game.onTick(20,"noHayMas",{
+				if(self.noHayMas()){
+					game.removeTickEvent("noHayMas")
+					self.final()
+			}})
+		}else{self.final()}
 	}
 	
-	method hayQueSpawnear(){
-		return enemigos.size()<max && cantMax < 10
+	method final(){
+		game.removeTickEvent("MOVENEMIGOS")
+		const esqueleto = new EnemigoFinal(image="enemigos/esqueleto-izq.png",position=game.at(15,5),hp = 20,expQueOtorga=5,golpe=2)
+		game.addVisual(esqueleto)
+		enemigos.add(esqueleto)
+		esqueleto.perseguir(personaje)
 	}
+	
+	method hayQueSpawnear(){return enemigos.size()<max && cantMax < max}
 	
 	method spawnEnemigos(){
 		const factory = factoriesEnemigos.get((0 .. 2).anyOne())
@@ -184,27 +186,41 @@ object generadorEnemigos{
 		enemigos.remove(enemigo)
 	}
 	
-	method setDeEnemigos(){
-		return /* #{esqueleto}*/ + self.enemigos()
-		 
+	method reiniciar(){
+		max += 10
+		enemigos= #{}
+		cantMax = 0
+	}
+	
+}
+
+class Factory{
+	method posicionNueva(){
+		const posicion = randomizer.emptyPosition()
+		if(posicion.y() > 2 and posicion.y() < 8){
+			return posicion	
+		}else{
+			const h = 2.randomUpTo(8).roundUp()
+			return game.at(posicion.x(),h)
+		}	
 	}
 }
 
-object ojoFactory{
+object ojoFactory inherits Factory{
 	method nuevoEnemigo(){
-		return new Ojo(position=randomizer.emptyPosition())
+		return new Ojo(position= self.posicionNueva())
 	}
 }
 
-object hongoFactory{
+object hongoFactory inherits Factory{
 	method nuevoEnemigo(){
-		return new Hongo(position=randomizer.emptyPosition())
+		return new Hongo(position=self.posicionNueva())
 	}
 }
 
-object goblinFactory{
+object goblinFactory inherits Factory{
 	method nuevoEnemigo(){
-		return new Goblin(position=randomizer.emptyPosition())
+		return new Goblin(position=self.posicionNueva())
 	}
 }
 

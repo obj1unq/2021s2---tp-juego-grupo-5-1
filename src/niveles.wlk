@@ -1,99 +1,107 @@
- import wollok.game.*
+import wollok.game.*
 import enemigos.*
 import personaje.*
 import direcciones.*
 import recursos.*
 import hechizos.*
+import visuales.*
+import hud.*
+import config.*
 
-object tutorial {
+class Tutorial {
 	method iniciar(){
 		visual.pj()
-		//visual.armas()
-		
-		//visual.enemigos()
 		//config.sonido()
 		config.configurarTeclas()
-//		config.configurarStamina()
         config.configurarSpawnEnemigos()
-//        game.addVisual(esqueleto)
-		config.movimientoEnemigos()
-		
 		game.addVisual(mostrarOro)
 		game.addVisual(temploDeMana)
 		game.addVisual(temploDeExperiencia)
-		
-		//game.cellSize(45)
-		//game.schedule(2000,{dialogo.inicial()})
 	}
 	
 }
-object dialogo {
+object tutorial inherits Tutorial{}
+
+object tutorial2 inherits Tutorial {
+	override method iniciar(){
+		visual.pj()
+		config.configurarTeclas()
+        config.configurarSpawnEnemigosDos()
+		game.addVisual(mostrarOro)
+		game.addVisual(temploDeMana)
+		game.addVisual(temploDeExperiencia)
+
+	}
 	
-	const tutorial = ["Hola guerrero","Necesito tu ayuda","para eliminar a los enemigos","Acercate al enemigo y","presiona la tecla A para atacar","cuando mueran nos daran oro"]
+}
+object tutorialBonus inherits Tutorial {
+	override method iniciar(){
+		visual.pj()
+		personaje.position(game.at(0,3))
+		game.addVisual(mostrarOro)
+		keyboard.left().onPressDo( { personaje.mover(izquierda)})
+		keyboard.right().onPressDo({ personaje.mover(derecha)})
+		fabricaDiamantes.iniciar()
+	}
 	
-	method inicial(){
-		tutorial.forEach({
-			texto =>
-			game.say(personaje,texto)
+}
+
+
+class Nivel{
+	const property position = game.at(0,2)
+	
+	const property escenario = []
+	
+	method show(){
+		game.clear()
+		game.addVisual(self)
+		
+	}
+}
+
+object inicio inherits Nivel{
+	const property image = "bg.png"
+	
+	override method show(){
+		super()
+		keyboard.enter().onPressDo({
+			nivel1.show()
 		})
 	}
 }
-object visual{
-	method pj(){
-		game.addVisual(personaje)
-		game.showAttributes(personaje)
+
+object nivel1 inherits Nivel{
+	const property image = "Battleground1.png"
+	
+	override method show(){
+	hud.visualizar()
+	game.addVisual(self)
+	tutorial.iniciar()
 	}
 	
-//	method enemigos(){
-//		game.addVisual(hongo)
-//		game.addVisual(ojo)
-//		game.addVisual(goblin)
-//		game.addVisual(esqueleto)
-//		game.showAttributes(hongo)
-//		game.showAttributes(ojo)
-//		game.showAttributes(esqueleto)
-//		game.showAttributes(goblin)
-//	}
 }
 
-object config{
-	method configurarTeclas(){
-		self.ataques()
-		self.movimientos()		
-		keyboard.s().onPressDo({personaje.guardar()})
+object nivel2 inherits Nivel{
+	const property image = "Battleground2.png"
+	override method show(){
+	super()
+	hud.visualizar()
+	hud.reiniciar()
+	tutorial2.iniciar()
 	}
-	
-	method configurarSpawnEnemigos(){
-		game.onTick(4000,"ENEMIGOS",{generadorEnemigos.spawnearEnemigo()})
-	}
-	
-	method sonido(){
-		const sonido = game.sound("donkey-kong-country.mp3")
-		sonido.shouldLoop(true)
-		game.schedule(500, { sonido.play()} )
-	}
-	
-	method ataques(){
-		keyboard.a().onPressDo({personaje.ataqueMelee()})
-		keyboard.num1().onPressDo({personaje.lanzar(fuego)})
-		keyboard.num2().onPressDo({personaje.lanzar(rayo)})
-		keyboard.num3().onPressDo({personaje.lanzar(hielo)})
-		keyboard.e().onPressDo({personaje.experienciaDoble()})
-		keyboard.c().onPressDo({personaje.concentrar()})
-	}
-	
-	method movimientos(){
-		keyboard.left().onPressDo( { personaje.mover(izquierda)})
-		keyboard.right().onPressDo({ personaje.mover(derecha)})
-		keyboard.up().onPressDo(   { personaje.mover(arriba)})
-		keyboard.down().onPressDo( { personaje.mover(abajo)})
-	}
-	
-	method movimientoEnemigos(){
-		game.onTick(1000,"MOVENEMIGOS",{generadorEnemigos.enemigos().forEach({enemigo => enemigo.perseguir(personaje)})})
-	}	
-	
-	
 }
+
+object bonus inherits Nivel{
+	const property image = "bonus.png"
+	override method show(){
+	super()
+	hud.visualizar()
+	hud.reiniciar()
+	hud.soloFlechasX()
+	tutorialBonus.iniciar()
+	}
+}
+
+
 
 

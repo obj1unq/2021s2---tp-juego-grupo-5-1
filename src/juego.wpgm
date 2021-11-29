@@ -1,14 +1,16 @@
-import objects.*
+import visuales.*
 import wollok.game.*
 import personaje.*
 import enemigos.*
 import niveles.*
+import hud.*
 
 program juego {
 	game.title("Juego Base")
-	game.height(13)
+	game.height(14)
 	game.width(21)
-	game.cellSize(83)
-	inicio.show()
+	game.cellSize(45)
+	game.boardGround("negro.jpg")
+	bonus.show()
 	game.start()
 }

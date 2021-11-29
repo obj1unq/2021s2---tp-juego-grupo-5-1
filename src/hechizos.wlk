@@ -2,7 +2,6 @@ import wollok.game.*
 import personaje.*
 import enemigos.*
 
-//HECHIZOS
 class Hechizo{
 	var property position = game.origin()
 	var property image
@@ -12,8 +11,8 @@ class Hechizo{
 	
 	method lanzar(dir,posicion){
 		position = posicion
-		
-		game.addVisual(self)
+		if(not game.hasVisual(self)){
+			game.addVisual(self)
 		var i = alcance
 		game.onTick(100,"lanzarAtaque",{
 			if(i > 0){
@@ -25,12 +24,14 @@ class Hechizo{
 				self.desaparecer()
 			}
 		})	
+		}
+		
 	}
 	
 	method verificarAtaque(){
 		const elementos = game.colliders(self)
 		elementos.forEach({x => 
-			if(generadorEnemigos.setDeEnemigos().contains(x)){
+			if(generadorEnemigos.enemigos().contains(x)){
 				personaje.subirDeNivel(x.expQueOtorga())
 				x.pierdeVida(damage)
 				self.desaparecer()
@@ -38,15 +39,14 @@ class Hechizo{
 	}
 	
 	method desaparecer(){
-		game.removeTickEvent("lanzarAtaque")
-		game.removeVisual(self)
+		if(game.hasVisual(self)){
+			game.removeVisual(self)
+			game.removeTickEvent("lanzarAtaque")
+		}
+		
 	}
 	
 }
-
-//object escudo{
-//	
-//}
 
 //LISTA DE HECHIZOS A DISTANCIA
 const listaHechizosBonus = [fuego, hielo, rayo]
