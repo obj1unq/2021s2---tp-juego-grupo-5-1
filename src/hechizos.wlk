@@ -50,7 +50,7 @@ class Hechizo{
 
 //LISTA DE HECHIZOS A DISTANCIA
 const listaHechizosBonus = [fuego, hielo, rayo]
-object fuego inherits Hechizo(damage = 5, image = "fuego.png",manaRequerida=20){}
-object hielo inherits Hechizo(damage = 5, image = "hielo.png",manaRequerida=20){}
-object rayo inherits Hechizo(damage = 5, image = "rayo.png",manaRequerida=20){}
+object fuego inherits Hechizo(damage = 2, image = "fuego.png",manaRequerida=20){}
+object hielo inherits Hechizo(damage = 10, image = "hielo.png",manaRequerida=40){}
+object rayo inherits Hechizo(damage = 5, image = "rayo.png",manaRequerida=30){}
 

@@ -82,7 +82,7 @@ class EnemigoRango inherits Enemigo{
 	}
 	
 	override method atacar(pj){
-		const ataque = new Ataque(position = self.position(),golpe = self.golpe(),dir = direccion)
+		const ataque = new Ataque(position = self.position(),golpe = self.golpe(),dir = direccion, image= "ataqueEnemigo.png")
 		ataque.lanzar(pj)	
 	}
 }
@@ -119,7 +119,7 @@ class EnemigoFinal inherits Enemigo{
 		self.atacar(pj)
 	}
 	override method atacar(pj){
-		const ataques = new AtaqueFinal(golpe= golpe,dir = izquierda)
+		const ataques = new AtaqueFinal(golpe= golpe,dir = izquierda, image= "ataqueEnemigo.png")
 		game.onTick(3000,"lanzamiento",{
 			ataques.lanzar(pj)
 			

@@ -9,7 +9,8 @@ class Ataque{
 	var property position = game.origin()
 	const golpe
 	const dir
-	method text() = "ataque"
+	var property image 
+	//method text() = "ataque"
 	
 	method lanzar(pj){
 		game.addVisual(self)
@@ -46,9 +47,9 @@ class Ataque{
 class AtaqueFinal inherits Ataque{
 	
 	method crearAtaques(){
-		const ataque2 = new Ataque(position = game.at(15,3),golpe = golpe,dir=dir)
-		const ataque4 = new Ataque(position = game.at(15,5),golpe = golpe,dir=dir)
-		const ataque6 = new Ataque(position = game.at(15,7),golpe = golpe,dir=dir)
+		const ataque2 = new Ataque(position = game.at(15,3),golpe = golpe,dir=dir, image= "ataqueEnemigo.png")
+		const ataque4 = new Ataque(position = game.at(15,5),golpe = golpe,dir=dir, image= "ataqueEnemigo.png")
+		const ataque6 = new Ataque(position = game.at(15,7),golpe = golpe,dir=dir, image= "ataqueEnemigo.png")
 		return [ataque2,ataque4,ataque6]
 	}
 	 override method lanzar(pj){
