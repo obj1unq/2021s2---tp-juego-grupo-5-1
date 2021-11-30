@@ -15,5 +15,4 @@ program juego {
 	game.boardGround("negro.jpg")
 	inicio.show()
 	game.start()
-	
 }

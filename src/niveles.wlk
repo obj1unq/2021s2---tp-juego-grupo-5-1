@@ -141,11 +141,3 @@ object bonus inherits Nivel{
 	tutorialBonus.iniciar()
 	}
 }
-
-
-
-
-
-
-
-
