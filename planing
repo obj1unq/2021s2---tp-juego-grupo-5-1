@@ -5,6 +5,9 @@ ASSET RESTANTES(PERFILDEL HUD,PERSONAJE,ENEMIGOS DEL SEGUNDO NIVEL,ATAQUE ENEMIG
 ELEGIR BOSSES
 AGREGAR ESCENAS(OPCIONAL)
 
+Funcion en espera() -> el enemigo antes de moverse pregunta si hay otro enemigo adelante, y y si lo hay espera 
+
+
 PERSONAJE:
 SI MOCHILA NO SE USA, BORRRARLO
 

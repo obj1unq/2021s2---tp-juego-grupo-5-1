@@ -71,7 +71,7 @@ class AtaqueFinal inherits Ataque{
 	}
 	
 	method verificarAtaque(pj,ataque){
-			if(game.hasVisual(self)){
+			if(game.hasVisual(ataque)){
 				const elementos = game.colliders(ataque)
 				if(elementos.contains(pj)){
 					pj.perderVida(golpe)
