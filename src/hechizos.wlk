@@ -7,7 +7,7 @@ class Hechizo{
 	var property image
 	var property damage
 	var property manaRequerida  
-	var property alcance = 10
+	var property alcance = 22
 	
 	method lanzar(dir,posicion){
 		position = posicion

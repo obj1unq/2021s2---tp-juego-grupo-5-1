@@ -13,7 +13,7 @@ class Ataque{
 	
 	method lanzar(pj){
 		game.addVisual(self)
-		var i = 10
+		var i = 22
 		game.onTick(100,"enemigoAtaca",{
 			if(i > 0){
 				position = dir.siguiente(position)
@@ -58,7 +58,7 @@ class AtaqueFinal inherits Ataque{
 	 	})
 	}
 	method lanzarlo(ataque,pj){
-		var i = 10
+		var i = 22
 		game.onTick(500,"enemigoAtacaLargo",{
 			if(i > 0){
 				moverse.moverAtaque(ataque)
