@@ -11,6 +11,6 @@ program juego {
 	game.width(21)
 	game.cellSize(45)
 	game.boardGround("negro.jpg")
-	bonus.show()
+	nivel1.show()
 	game.start()
 }
