@@ -27,7 +27,7 @@ object config{
 	}
 	
 	method sonido(){
-		const sonido = game.sound("donkey-kong-country.mp3")
+		const sonido = game.sound("theme.mp3")
 		sonido.shouldLoop(true)
 		game.schedule(500, { sonido.play()} )
 	}

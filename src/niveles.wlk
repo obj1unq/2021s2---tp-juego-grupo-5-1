@@ -11,7 +11,7 @@ import config.*
 class Tutorial {
 	method iniciar(){
 		visual.pj()
-		//config.sonido()
+		config.sonido()
 		config.configurarTeclas()
         config.configurarSpawnEnemigos()
 		game.addVisual(mostrarOro)
@@ -47,8 +47,11 @@ object tutorialBonus inherits Tutorial {
 }
 
 
+
+
+
 class Nivel{
-	const property position = game.at(0,2)
+	var property position = game.at(0,2)
 	
 	const property escenario = []
 	
@@ -59,16 +62,53 @@ class Nivel{
 	}
 }
 
-object inicio inherits Nivel{
-	const property image = "bg.png"
+object inicio inherits Nivel(position = game.at(0,0)){
+	const property image = "portada.png"
 	
 	override method show(){
 		super()
 		keyboard.enter().onPressDo({
-			nivel1.show()
+			game.clear()
+			tutorialDeJuego1.show()
 		})
 	}
 }
+
+object tutorialDeJuego1 inherits Nivel(position = game.at(0,0)){
+	const property image = "tuto1.png"
+	
+	override method show(){
+		super()
+		keyboard.enter().onPressDo({
+			game.clear()
+			nivel1.show()
+		})
+		
+		keyboard.right().onPressDo({
+			game.clear()
+			tutorialDeJuego2.show()
+		})
+	}
+}
+
+object tutorialDeJuego2 inherits Nivel(position = game.at(0,0)){
+	const property image = "tuto2.png"
+	
+	override method show(){
+		super()
+		
+		keyboard.enter().onPressDo({
+			game.clear()
+			nivel1.show()
+		})
+		
+		keyboard.left().onPressDo({
+			game.clear()
+			tutorialDeJuego1.show()
+		})
+	}
+}
+
 
 object nivel1 inherits Nivel{
 	const property image = "Battleground1.png"
@@ -101,7 +141,3 @@ object bonus inherits Nivel{
 	tutorialBonus.iniciar()
 	}
 }
-
-
-
-
