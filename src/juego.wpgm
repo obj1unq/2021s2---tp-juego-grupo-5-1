@@ -5,12 +5,15 @@ import enemigos.*
 import niveles.*
 import hud.*
 
+
 program juego {
 	game.title("Juego Base")
 	game.height(14)
 	game.width(21)
 	game.cellSize(45)
+	inicio.show()
 	game.boardGround("negro.jpg")
-	nivel1.show()
+	inicio.show()
 	game.start()
+	
 }

@@ -140,6 +140,19 @@ object fabricaDiamantes{
 	
 }
 
+//class TutorialDeJuego{
+//  const image
+//  
+//}
+//
+//object tutorialGameplay1 inherits TutorialDeJuego (image = "tutorial1.png"){
+//	method position(){return game.at(0,0) } 
+//}
+//
+//object tutorialGameplay2 inherits TutorialDeJuego(image = "tutorial2.png"){
+//	method position(){return game.at(0,0) } 
+//}
+//
 
 
 
