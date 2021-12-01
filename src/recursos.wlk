@@ -2,32 +2,6 @@ import wollok.game.*
 import personaje.*
 import randomizer.*
 
-class Pocion{
-	var property position
-	const property poder
-	var property image
-	var contenedor = null
-	
-	method usar(_personaje){
-		_personaje.sumarVida(poder)
-		game.removeVisual(self)
-	}
-
-	method validarGuardado(){}
-	
-	method agregadoEn(_contenedor){
-		contenedor = _contenedor
-	}
-	
-	method position(){
-		return if(contenedor != null){
-			contenedor.dondeEstoy(self)
-		}else{
-			position
-		}
-	}
-}
-
 
 
 class Oro{
@@ -176,6 +150,77 @@ object fabricaDiamantes{
 //	method position(){return game.at(0,0) } 
 //}
 //
+class Pocion{
+	var property position
+	const property poder
+	var property image
+	var contenedor = null
+	
+	method usar(_personaje){
+		_personaje.sumarVida(poder)
+		game.removeVisual(self)
+	}
+
+	method validarGuardado(){}
+	
+	method agregadoEn(_contenedor){
+		contenedor = _contenedor
+	}
+	
+	method position(){
+		return if(contenedor != null){
+			contenedor.dondeEstoy(self)
+		}else{
+			position
+		}
+	}
+	
+	method validarFin(){
+		game.schedule(2000,{
+			self.desaparecer()
+		})
+	}
+	method desaparecer(){
+		if(game.hasVisual(self)){
+			game.removeVisual(self)
+		}
+	}
+	
+}
+
+
+class PocionHp inherits Pocion(image="vida.png"){
+    
+}
+
+
+object dropPociones{
+    const factoriesPociones = [pocionHpFactory,pocionMpFactory]
+    
+    method dropearPocion(enemigo){
+    	const nuevo = self.dropEnPosicion(enemigo)
+        game.addVisual(nuevo)
+        nuevo.validarFin()
+    }
+    
+    method dropEnPosicion(enemigo){
+        const factory = factoriesPociones.get((0 .. 1).anyOne())
+        return factory.nuevaPocionEn(enemigo) 
+    }
+}
+
+
+object pocionHpFactory{
+    method nuevaPocionEn(enemigo){
+        return new PocionHp(position=game.at(enemigo.position().x(),enemigo.position().y()),poder = 1.randomUpTo(10).roundUp())
+    }
+}
+
+object pocionMpFactory{
+    method nuevaPocionEn(enemigo){
+        return new PocionHp(position=game.at(enemigo.position().x(),enemigo.position().y()),poder = 1.randomUpTo(10).roundUp())
+    }
+}
 
 
 

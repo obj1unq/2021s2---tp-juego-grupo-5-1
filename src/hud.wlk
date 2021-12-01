@@ -20,14 +20,14 @@ const cuadro= new Visual(position= game.at(13,0),image = "hud/cuadro.png")
 
 object hud {
 	
-	
-    method actualizarVida(vida){
-    	orbeVida.actualizar(vida)
-    }
-    
-    method actualizarMana(mana){
-    	orbeMana.actualizar(mana)
-    }
+//	
+//    method actualizarVida(vida){
+//    	orbeVida.actualizar(vida)
+//    }
+//    
+//    method actualizarMana(mana){
+//    	orbeMana.actualizar(mana)
+//    }
     
 	method visualizar(){
 		game.addVisual(perfil)
@@ -56,27 +56,23 @@ object hud {
 class Orbe {
 	var property position
 	var property image
+	method actualizar()
 	
-	method actualizar(numero)
 }
 
 
-object orbeVida inherits Orbe(position = game.at(5,0), image = "hp-10.png" ){
-	
-	override method actualizar(_numero){
-	 	self.image(_numero)
+object orbeVida inherits Orbe(position = game.at(5,0),image ="hp-"+personaje.vida()+ ".png"){
+	override method actualizar(){
+		image = "hp-"+ personaje.vida() +".png"
 	}
-	
-	method image(numero) = "hp-"+ numero +".png"
+	//override method image() = "hp-"+ personaje.vida() +".png"
 }
 
-object orbeMana inherits Orbe(position = game.at(7,0), image ="mp-10.png" ){
-	
-	override method actualizar(_numero){
-	 	self.image(_numero)
+object orbeMana inherits Orbe(position = game.at(7,0),image ="hp-"+personaje.mana() / 10+ ".png"){
+	override method actualizar(){
+		image = "mp-"+ personaje.mana() / 10 +".png"
 	}
-	
-	method image(numero) = "mp-"+ numero +".png"
+//	override method image() = "mp-"+ personaje.mana() / 10 +".png"
 }
 
 

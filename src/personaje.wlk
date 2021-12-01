@@ -38,11 +38,11 @@ object personaje {
 	method irA(nuevaPosicion){position = nuevaPosicion}
 	
 	method sufijo(){return direccion.sufijo()}
-	//****
+	
 	method recuperarMana(cantidad){
 		if (self.noTieneFullMana()){ 
 			mana = (mana + cantidad).min(100)
-			hud.actualizarMana(mana/10)
+			orbeMana.actualizar()
 		}
 	}
 	
@@ -50,7 +50,7 @@ object personaje {
 	
 	method agotoMana(){ return mana == 0 }
 	
-//*****MOCHILA REVISAR SI SE USAAA!
+
 	method contiene(elemento){
 		if(not mochila.tiene(elemento)){
 			self.error("no hay "+ elemento.toString() + " en el inventario")
@@ -90,7 +90,7 @@ object personaje {
 	
 	method gastarMana(hechizo){
 		mana -= hechizo.manaRequerida().max(0)
-		hud.actualizarMana(mana /10)
+		orbeMana.actualizar()
 	}
 	
 	method validarSiSePuedeLanzar(hechizo){
@@ -112,13 +112,13 @@ object personaje {
 	
 	method perderVida(x){
 		vida = (vida - x).max(0)
-		hud.actualizarVida(vida)
+		orbeVida.actualizar()
 		self.perder()
 	}
 
 	method sumarVida(x){
 		vida = (vida + x).min(10)
-		hud.actualizarVida(vida)
+		orbeVida.actualizar()
 	}
 	
 
@@ -150,7 +150,7 @@ object personaje {
 		self.validarQueEstaEnTemplo(temploDeMana)
 		if(mana < 100){
 			mana = (mana + 20).min(100)
-			hud.actualizarMana(mana/10)  
+			orbeMana.actualizar()
 		}
 	}
 	

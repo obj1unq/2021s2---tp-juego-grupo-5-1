@@ -28,6 +28,7 @@ class Enemigo {
 			game.removeVisual(self)
 			generadorEnemigos.remover(self)
 			self.darRecompensaDeOro()
+			self.drop()
 		}
 	}
 	
@@ -44,6 +45,9 @@ class Enemigo {
 	
 	method validarGuardado(){self.error("No se puede guardar a un enemigo")}
 	
+	method drop(){
+        dropPociones.dropearPocion(self)
+    }
 	method perseguir(pj)
 	
 	method atacar(pj)	
@@ -133,6 +137,9 @@ class EnemigoFinal inherits Enemigo{
 		}
 	
 	}
+	override method drop(){
+       
+    }
 }
 
 
