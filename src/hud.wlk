@@ -105,12 +105,12 @@ object rayoLogo{
 
 object manaorb{
 	var property position = game.at(4,0)
-	method image() = "mp-0.png"
+	method image() = "mp-10.png"
 }
 
 object hporb{
 	var property position = game.at(4,0)
-	method image() = "hp-0.png"
+	method image() = "hp-10.png"
 }
 
 

@@ -35,8 +35,8 @@ object config{
 	method ataques(){
 		keyboard.a().onPressDo({personaje.ataqueMelee()})
 		keyboard.num1().onPressDo({personaje.lanzar(fuego)})
-		keyboard.num2().onPressDo({personaje.lanzar(rayo)})
-		keyboard.num3().onPressDo({personaje.lanzar(hielo)})
+		keyboard.num2().onPressDo({personaje.lanzar(hielo)})
+		keyboard.num3().onPressDo({personaje.lanzar(rayo)})
 		//keyboard.e().onPressDo({personaje.experienciaDoble()})
 		keyboard.c().onPressDo({personaje.concentrar()})
 	}
