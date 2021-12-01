@@ -111,7 +111,7 @@ class Hongo inherits EnemigoMele(image = "enemigos/hongo.png"){
 
 class EnemigoFinal inherits Enemigo{
 	
-	override method image() = "enemigos/esqueleto-" + self.sufijo() + ".png"
+	override method image() = "enemigos/brujoFase1-izq.png"
 	override method perseguir(pj){
 		game.onTick(2000,"enY",{
 			position = game.at(position.x(),2.randomUpTo(8).roundUp())
@@ -169,13 +169,18 @@ object generadorEnemigos {
 	
 	method final(){
 		game.removeTickEvent("MOVENEMIGOS")
-		const esqueleto = new EnemigoFinal(image="enemigos/esqueleto-izq.png",position=game.at(15,5),hp = 20,expQueOtorga=5,golpe=2)
-		game.addVisual(esqueleto)
-		enemigos.add(esqueleto)
-		esqueleto.perseguir(personaje)
+		const brujo = new EnemigoFinal(image="enemigos/brujoFase1-izq.png",position=game.at(15,5),hp = 20,expQueOtorga=5,golpe=2)
+		game.addVisual(brujo)
+		enemigos.add(brujo)
+		brujo.perseguir(personaje)
 	}
 	
 	method hayQueSpawnear(){return enemigos.size()<max && cantMax < max}
+	
+//	method enemigoFinalSegunNivel(){
+//		if(nivel.image())
+//	}
+	
 	
 	method spawnEnemigos(){
 		const factory = factoriesEnemigos.get((0 .. 2).anyOne())

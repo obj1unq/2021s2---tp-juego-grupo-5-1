@@ -53,6 +53,7 @@ object tutorialBonus inherits Tutorial {
 class Nivel{
 	var property position = game.at(0,2)
 	
+	
 	const property escenario = []
 	
 	method show(){
