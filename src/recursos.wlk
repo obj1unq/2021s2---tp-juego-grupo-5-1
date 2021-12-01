@@ -1,5 +1,6 @@
 import wollok.game.*
 import personaje.*
+import randomizer.*
 
 class Pocion{
 	var property position
@@ -47,6 +48,18 @@ class Templo{
 	var property image
 	
 	method activar(){ }
+	
+	method reiniciar()
+	
+	method posicionNueva(){
+		const posicion = randomizer.emptyPosition()
+		if(posicion.y() > 2 and posicion.y() < 8){
+			return posicion	
+		}else{
+			const h = 2.randomUpTo(8).roundUp()
+			return game.at(posicion.x(),h)
+		}	
+	}
 }
 
 //DEFINICION DE TEMPLO
@@ -56,14 +69,24 @@ object temploDeMana inherits Templo(position = game.at(2,2), image="vida.png") {
 	override method activar(){
 		personaje.concentrar()
 	}
-}
-
-
-object temploDeExperiencia inherits Templo(position = game.at(4,8),image = "temploExperiencia.png"){
-	override method activar(){
-		personaje.experienciaDoble()
+	
+	override method reiniciar(){
+		position = self.posicionNueva()
 	}
 }
+
+
+//object temploDeExperiencia inherits Templo(position = game.at(4,8),image = "temploExperiencia.png"){
+//	override method activar(){
+//		personaje.experienciaDoble()
+//	}
+//	
+//	override method reiniciar(){
+//		position = self.posicionNueva()
+//	}
+//	
+//	
+//}
 
 class Diamante{
 	const oro 
@@ -132,7 +155,7 @@ object fabricaDiamantes{
 		game.schedule(2000,{game.stop()})
 	}
 	method darConteo(){
-		game.say(personaje,"Tu puntuacion final es: " + (inventario.cantidadDeOro() / 40).min(10))
+		game.say(personaje,"Tu puntuacion final es: " + (inventario.cantidadDeOro() / 40).min(10).roundUp())
 	}
 	method nuevo(posicion){
 		return new Diamante(oro = (2 .. 20).anyOne(),position = posicion,image = imagenes.get((0 .. 6).anyOne()))

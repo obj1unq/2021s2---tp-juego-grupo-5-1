@@ -42,7 +42,7 @@ object personaje {
 	method recuperarMana(cantidad){
 		if (self.noTieneFullMana()){ 
 			mana = (mana + cantidad).min(100)
-			hud.agregarMana(cantidad)
+			hud.actualizarMana(mana/10)
 		}
 	}
 	
@@ -90,7 +90,7 @@ object personaje {
 	
 	method gastarMana(hechizo){
 		mana -= hechizo.manaRequerida().max(0)
-		hud.quitarMana(hechizo.manaRequerida() /10)
+		hud.actualizarMana(mana /10)
 	}
 	
 	method validarSiSePuedeLanzar(hechizo){
@@ -112,13 +112,13 @@ object personaje {
 	
 	method perderVida(x){
 		vida = (vida - x).max(0)
-		hud.quitarVidas(x)
+		hud.actualizarVida(vida)
 		self.perder()
 	}
 
 	method sumarVida(x){
 		vida = (vida + x).min(10)
-		hud.agregarVidas(x)
+		hud.actualizarVida(vida)
 	}
 	
 
@@ -150,7 +150,7 @@ object personaje {
 		self.validarQueEstaEnTemplo(temploDeMana)
 		if(mana < 100){
 			mana = (mana + 20).min(100)
-			hud.agregarMana(2)
+			hud.actualizarMana(mana/10)  
 		}
 	}
 	
@@ -164,20 +164,20 @@ object personaje {
 	 return game.colliders(self).contains(tipo)
 	}
 
-	method experienciaDoble(){
-		self.validarQueEstaEnTemplo(temploDeExperiencia)
-		 generadorEnemigos.enemigos().forEach({enemigo => enemigo.duplicarExp()})
-	}
+//	method experienciaDoble(){
+//		self.validarQueEstaEnTemplo(temploDeExperiencia)
+//		 generadorEnemigos.enemigos().forEach({enemigo => enemigo.duplicarExp()})
+//	}
 	
 	method ganar(){
 			game.say(self,"GANASTE")
-			game.schedule(2000,{game.stop()})
+			game.schedule(8000,{game.stop()})
 	}
 	
 	method ganarNivel(){
 		game.say(self,"Continuemos con el sig nivel!")
 		if(pantalla == 1){
-			game.schedule(2000,{nivel2.show()})
+			game.schedule(4000,{nivel2.show()})
 			pantalla += 1
 		}
 		else if(pantalla == 2){
@@ -190,7 +190,7 @@ object personaje {
 	method perder(){
 		if(vida == 0){
 			game.say(self,"PERDISTE")
-			game.schedule(2000,{game.stop()})
+			game.schedule(8000,{game.stop()})
 		}
 	}
 	

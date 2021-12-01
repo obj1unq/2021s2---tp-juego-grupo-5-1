@@ -16,7 +16,7 @@ class Tutorial {
         config.configurarSpawnEnemigos()
 		game.addVisual(mostrarOro)
 		game.addVisual(temploDeMana)
-		game.addVisual(temploDeExperiencia)
+		//game.addVisual(temploDeExperiencia)
 	}
 	
 }
@@ -29,7 +29,7 @@ object tutorial2 inherits Tutorial {
         config.configurarSpawnEnemigosDos()
 		game.addVisual(mostrarOro)
 		game.addVisual(temploDeMana)
-		game.addVisual(temploDeExperiencia)
+		//game.addVisual(temploDeExperiencia)
 
 	}
 	
@@ -126,7 +126,7 @@ object nivel2 inherits Nivel{
 	override method show(){
 	super()
 	hud.visualizar()
-	hud.reiniciar()
+	temploDeMana.reiniciar()
 	tutorial2.iniciar()
 	}
 }
@@ -136,7 +136,6 @@ object bonus inherits Nivel{
 	override method show(){
 	super()
 	hud.visualizar()
-	hud.reiniciar()
 	hud.soloFlechasX()
 	tutorialBonus.iniciar()
 	}
