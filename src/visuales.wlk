@@ -12,6 +12,7 @@ object visual{
 		personaje.reiniciar()
 		game.addVisual(personaje)
 		game.showAttributes(personaje)
+		//game.addVisual(mostrarVida)
 	}
 	
 }

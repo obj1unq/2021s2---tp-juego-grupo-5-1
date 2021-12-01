@@ -1,6 +1,7 @@
 import wollok.game.*
 import personaje.*
 import enemigos.*
+import hud.*
 
 class Hechizo{
 	var property position = game.origin()
@@ -28,6 +29,8 @@ class Hechizo{
 		
 	}
 	
+	method logo()
+	
 	method verificarAtaque(){
 		const elementos = game.colliders(self)
 		elementos.forEach({x => 
@@ -50,7 +53,20 @@ class Hechizo{
 
 //LISTA DE HECHIZOS A DISTANCIA
 const listaHechizosBonus = [fuego, hielo, rayo]
-object fuego inherits Hechizo(damage = 2, image = "fuego.png",manaRequerida=20){}
-object hielo inherits Hechizo(damage = 10, image = "hielo.png",manaRequerida=40){}
-object rayo inherits Hechizo(damage = 5, image = "rayo.png",manaRequerida=30){}
+object fuego inherits Hechizo(damage = 2, image = "fuego.png",manaRequerida=20){
+	override method logo(){
+		return fuegoLogo.image()
+	}
+}
+object hielo inherits Hechizo(damage = 10, image = "hielo.png",manaRequerida=40){
+	override method logo(){
+		return hieloLogo.image()
+	}
+}
+object rayo inherits Hechizo(damage = 5, image = "rayo.png",manaRequerida=30){
+	override method logo(){
+		return rayoLogo.image()
+	}
+	
+}
 

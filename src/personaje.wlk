@@ -40,11 +40,11 @@ object personaje {
 	method sufijo(){return direccion.sufijo()}
 	
 	method recuperarMana(cantidad){
-		if (self.noTieneFullMana()){ 
-			mana = (mana + cantidad).min(100)
-			orbeMana.actualizar()
-		}
-	}
+        if (self.noTieneFullMana()){ 
+            mana = (mana + cantidad).min(100)
+            hud.actualizarMana()
+        }
+    }
 	
 	method noTieneFullMana(){ return mana < 100 }
 	
@@ -65,7 +65,9 @@ object personaje {
 	}
 	
 	method guardarEnInventario(recurso){
-		mochila.agregar(recurso)
+		recurso.desaparecer()
+		self.sumarVida(recurso.poder())
+		
 	}
 	
 	method remove(elemento){mochila.eliminar(elemento)}
@@ -89,9 +91,9 @@ object personaje {
 	}
 	
 	method gastarMana(hechizo){
-		mana -= hechizo.manaRequerida().max(0)
-		orbeMana.actualizar()
-	}
+        mana -= hechizo.manaRequerida().max(0)
+        hud.actualizarMana()
+    }
 	
 	method validarSiSePuedeLanzar(hechizo){
 		self.validarSiAprendio(hechizo)
@@ -111,15 +113,15 @@ object personaje {
 	}
 	
 	method perderVida(x){
-		vida = (vida - x).max(0)
-		orbeVida.actualizar()
-		self.perder()
-	}
+        vida = (vida - x).max(0)
+        hud.actualizarVida()
+        self.perder()
+    }
 
-	method sumarVida(x){
-		vida = (vida + x).min(10)
-		orbeVida.actualizar()
-	}
+	  method sumarVida(x){
+        vida = (vida + x).min(10)
+        hud.actualizarVida()
+    }
 	
 
 	method subirDeNivel(_exp){
@@ -134,25 +136,26 @@ object personaje {
 	}
 
 	method aprenderNuevoHechizo(){
-		const niveles = [2,3,4]
-		niveles.forEach({x => 
-			if(self.esNivel(x)){
-				const element = listaHechizosBonus.first()
-				hechizosAprendidos.add(element)
-				listaHechizosBonus.remove(element)
-			}
-		})
-	} 
+        const niveles = [2,3,4]
+        niveles.forEach({x => 
+            if(self.esNivel(x)){
+                const element = listaHechizosBonus.first()
+                hechizosAprendidos.add(element)
+                listaHechizosBonus.remove(element)
+                hud.activarHechizo()
+            }
+        })
+    }
 	
 	method esNivel(numero){return nivel == numero}
 	
 	method concentrar(){
-		self.validarQueEstaEnTemplo(temploDeMana)
-		if(mana < 100){
-			mana = (mana + 20).min(100)
-			orbeMana.actualizar()
-		}
-	}
+        self.validarQueEstaEnTemplo(temploDeMana)
+        if(mana < 100){
+            mana = (mana + 20).min(100)
+            hud.actualizarMana()
+        }
+    }
 	
 	method validarQueEstaEnTemplo(tipo){
 		if(! self.estaEnTemplo(tipo)){

@@ -17,6 +17,11 @@ object mostrarOro{
 	method text() = "oro:  " + inventario.cantidadDeOro()
 }
 
+object mostrarVida{
+	var property position = game.at(0,2)
+	method text() = personaje.vida()
+}
+
 class Templo{
 	var property position 
 	var property image
@@ -125,8 +130,8 @@ object fabricaDiamantes{
 	}
 	method detener(){
 		game.removeTickEvent("crearDiamantes")
-		self.darConteo()
-		game.schedule(2000,{game.stop()})
+	    game.schedule(3000,{self.darConteo()})
+		game.schedule(9000,{game.stop()})
 	}
 	method darConteo(){
 		game.say(personaje,"Tu puntuacion final es: " + (inventario.cantidadDeOro() / 40).min(10).roundUp())
@@ -189,7 +194,7 @@ class Pocion{
 }
 
 
-class PocionHp inherits Pocion(image="vida.png"){
+class PocionHp inherits Pocion(image="hp.png"){
     
 }
 

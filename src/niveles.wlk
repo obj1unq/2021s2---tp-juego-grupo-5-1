@@ -127,6 +127,7 @@ object nivel2 inherits Nivel{
 	override method show(){
 	super()
 	hud.visualizar()
+	hud.reiniciarPoderes()
 	temploDeMana.reiniciar()
 	tutorial2.iniciar()
 	}

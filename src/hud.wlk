@@ -19,64 +19,94 @@ const cuadro= new Visual(position= game.at(13,0),image = "hud/cuadro.png")
 
 
 object hud {
-	
-//	
-//    method actualizarVida(vida){
-//    	orbeVida.actualizar(vida)
-//    }
-//    
-//    method actualizarMana(mana){
-//    	orbeMana.actualizar(mana)
-//    }
     
-	method visualizar(){
-		game.addVisual(perfil)
-		game.addVisual(flechaIzq)
-		game.addVisual(flechaDer)
-		game.addVisual(flechaAba)
-		game.addVisual(flechaArr)
-		game.addVisual(cuadro)
-		game.addVisual(hudMedio)
-		game.addVisual(hieloLogo)
-		game.addVisual(fuegoLogo)
-		game.addVisual(rayoLogo)
-		game.addVisual(hporb)
-		game.addVisual(manaorb)
-		//game.addVisual(orbeVida)
-		//game.addVisual(orbeMana)
-	}
-	method soloFlechasX(){
-		game.removeVisual(flechaAba)
-		game.removeVisual(flechaArr)
-	}
-	
+    var property mana = [new OrbeMana(position = game.at(4,0),image = "mp-"+personaje.mana() / 10+ ".png")]
+    var property vida = [new OrbeVida(position = game.at(4,0),image = "hp-"+personaje.vida()+ ".png")]
+    var property listaAtaquesBonus = [fuegoLogo, hieloLogo, rayoLogo]
+    var property listaAtaquesBonusAprendido = []
+    
+    method actualizarVida(){
+        if(game.hasVisual(vida.first())){
+            game.removeVisual(vida.first())
+            vida.remove(vida.first())
+        }
+        const nuevo = new OrbeVida(position = game.at(4,0),image = "hp-"+personaje.vida()+ ".png")
+        vida.add(nuevo)
+        game.addVisual(nuevo)
+
+    }
+    
+    method actualizarMana(){
+        if(game.hasVisual(mana.first())){
+            game.removeVisual(mana.first())
+        mana.remove(mana.first())
+        }
+        const nuevo = new OrbeMana(position = game.at(4,0),image = "mp-"+personaje.mana() / 10+ ".png")
+        mana.add(nuevo)
+        game.addVisual(nuevo)
+    }
+    
+    method activarHechizo(){
+        const aprendido = listaAtaquesBonus.first()
+        game.addVisual(aprendido)
+        listaAtaquesBonus.remove(aprendido)
+        listaAtaquesBonusAprendido.add(aprendido)
+    }
+    
+    method visualizar(){
+        game.addVisual(perfil)
+        game.addVisual(flechaIzq)
+        game.addVisual(flechaDer)
+        game.addVisual(flechaAba)
+        game.addVisual(flechaArr)
+        game.addVisual(cuadro)
+        game.addVisual(hudMedio)
+//        game.addVisual(hieloLogo)
+//        game.addVisual(fuegoLogo)
+//        game.addVisual(rayoLogo)
+//        game.addVisual(hporb)
+//        game.addVisual(manaorb)
+        game.addVisual(vida.first())
+        game.addVisual(mana.first())
+        
+    }
+    method soloFlechasX(){
+        game.removeVisual(flechaAba)
+        game.removeVisual(flechaArr)
+    }
+    
+    method reiniciarPoderes(){
+        listaAtaquesBonusAprendido.forEach({x => game.addVisual(x)})
+    }
+    
 }
 
 
 class Orbe {
-	var property position
-	var property image
-	method actualizar()
-	
+    var property position
+    var property image 
+    method agregar(){
+        game.addVisual(self)
+    }
+    method remover(){
+        game.removeVisual(self)
+    }
+    
 }
 
 
-object orbeVida inherits Orbe(position = game.at(5,0),image ="hp-"+personaje.vida()+ ".png"){
-	override method actualizar(){
-		image = "hp-"+ personaje.vida() +".png"
-	}
-	//override method image() = "hp-"+ personaje.vida() +".png"
+class OrbeVida inherits Orbe(position = game.at(4,0),image = "hp-"+personaje.vida()+ ".png"){
+    
+    
 }
 
-object orbeMana inherits Orbe(position = game.at(7,0),image ="hp-"+personaje.mana() / 10+ ".png"){
-	override method actualizar(){
-		image = "mp-"+ personaje.mana() / 10 +".png"
-	}
-//	override method image() = "mp-"+ personaje.mana() / 10 +".png"
+class OrbeMana inherits Orbe(position = game.at(4,0),image ="hp-"+personaje.mana() / 10+ ".png"){
 }
 
 
 //--
+
+
 
 object hudMedio{
 	var property position = game.at(4,0)
