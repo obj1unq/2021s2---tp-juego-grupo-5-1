@@ -36,6 +36,7 @@ object tutorial2 inherits Tutorial {
 }
 object tutorialBonus inherits Tutorial {
 	override method iniciar(){
+		config.sonidoBonus()
 		visual.pj()
 		personaje.position(game.at(0,3))
 		game.addVisual(mostrarOro)
@@ -126,6 +127,7 @@ object nivel2 inherits Nivel{
 	const property image = "Battleground2.png"
 	override method show(){
 	super()
+	config.sonido2()
 	hud.visualizar()
 	hud.reiniciarPoderes()
 	temploDeMana.reiniciar()

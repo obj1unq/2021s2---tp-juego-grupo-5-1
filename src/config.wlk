@@ -8,6 +8,10 @@ import visuales.*
 import hud.*
 
 object config{
+	var property sonido = game.sound("theme.mp3")
+	var property sonido2 = game.sound("theme2.mp3")
+	var property sonidoBonus = game.sound("bonusTheme.mp3")
+	
 	method configurarTeclas(){
 		self.ataques()
 		self.movimientos()		
@@ -27,9 +31,20 @@ object config{
 	}
 	
 	method sonido(){
-		const sonido = game.sound("theme.mp3")
 		sonido.shouldLoop(true)
 		game.schedule(500, { sonido.play()} )
+	}
+	
+		method sonido2(){
+		sonido.stop()	
+		sonido2.shouldLoop(true)
+		game.schedule(500, { sonido2.play()} )
+	}
+	
+	method sonidoBonus(){
+		sonido2.stop()
+		sonidoBonus.shouldLoop(true)
+		game.schedule(500, { sonidoBonus.play()} )
 	}
 	
 	method ataques(){

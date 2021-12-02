@@ -54,12 +54,12 @@ object hud {
     }
     
     method visualizar(){
-        game.addVisual(perfil)
+       // game.addVisual(perfil)
         game.addVisual(flechaIzq)
         game.addVisual(flechaDer)
         game.addVisual(flechaAba)
         game.addVisual(flechaArr)
-        game.addVisual(cuadro)
+        //game.addVisual(cuadro)
         game.addVisual(hudMedio)
 //        game.addVisual(hieloLogo)
 //        game.addVisual(fuegoLogo)

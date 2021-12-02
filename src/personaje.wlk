@@ -154,7 +154,14 @@ object personaje {
         if(mana < 100){
             mana = (mana + 20).min(100)
             hud.actualizarMana()
+            self.cambiarImagen()
         }
+    }
+    
+      method cambiarImagen(){
+        const anterior = direccion
+        direccion = concentrando
+        game.schedule(3000,{direccion = anterior})
     }
 	
 	method validarQueEstaEnTemplo(tipo){
