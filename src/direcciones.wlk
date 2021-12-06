@@ -12,13 +12,13 @@ object arriba {
 	}
 }
 
-object concentrando{
-    method siguiente(posicion){
-    }
-    method sufijo(){
-        return "con"
-    }
-}
+//object concentrando{
+//    method siguiente(posicion){
+//    }
+//    method sufijo(){
+//        return "con"
+//    }
+//}
 
 object abajo {
 	method siguiente(posicion){

@@ -12,7 +12,7 @@ program juego {
 	game.height(14)
 	game.width(21)
 	game.cellSize(45)
-	inicio.show()
+	bonus.show()
 	game.boardGround("negro.jpg")
 	inicio.show()
 	game.start()

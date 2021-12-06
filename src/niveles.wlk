@@ -36,7 +36,7 @@ object tutorial2 inherits Tutorial {
 }
 object tutorialBonus inherits Tutorial {
 	override method iniciar(){
-		config.sonidoBonus()
+//		config.sonidoBonus()
 		visual.pj()
 		personaje.position(game.at(0,3))
 		game.addVisual(mostrarOro)
